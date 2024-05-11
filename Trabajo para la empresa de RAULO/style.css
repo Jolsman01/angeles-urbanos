@@ -1,0 +1,17 @@
+body {
+    background-color: blue;
+}
+
+#botondeinicio {
+    justify-content: center;
+    align-items: center;
+}
+
+.Navegacion {
+    background-color: orange;
+}
+
+#Camiseta {
+    justify-content: center;
+    align-items: center;
+}
