@@ -1,0 +1,10 @@
+primario:               #3d3f92 / #212ca8
+secundario:             #f38631 / #ff7101 
+
+color botones:          #121A6F
+
+Estilo de letra: LONDRINDA SOLID
+
+
+Link del figma: 
+https://www.figma.com/design/bX0MK34kmprc6ocPAAlrB5/Untitled?node-id=0-1&t=HGMDFrp9kOr5oXTq-0
