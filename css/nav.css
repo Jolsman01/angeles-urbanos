@@ -1,0 +1,72 @@
+.navbar {
+    height: 8rem;
+    padding: 0 3.4rem 0 3.4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(to right, var(--blanco) 0%, var(--azul) 22%);
+}
+
+.navbar .nav-links a.btn {
+    text-decoration: none;
+    text-transform: uppercase;
+    color: var(--blanco);
+    border-radius: 10%;
+    border: 0.1rem transparent;
+    font-weight: 300;
+    font-size: 2.7rem;
+    margin: 0 1rem;
+    position: relative;
+}
+
+.navbar .nav-links a.btn:hover {
+    color: #caadad;
+}
+
+.navbar .nav-links a.btn::before,
+.navbar .nav-links a.btn::after {
+    content: '';
+    position: absolute;
+    border-bottom: 0.5rem solid var(--naranja);
+    transition: 0.3s all;
+}
+
+.navbar .nav-links a.btn::before {
+    bottom: -0.5rem;
+    width: 0;
+    right: 0;
+}
+
+.navbar .nav-links a.btn:hover:before {
+    bottom: -0.5rem;
+    width: 85%;
+}
+
+.navbar .nav-links a.btn::after {
+    border-bottom: 0.5rem solid var(--naranja);
+    bottom: -1rem;
+    width: 0;
+    left: 0;
+}
+
+.navbar .nav-links a.btn:hover:after {
+    border-bottom: 0.5rem solid var(--naranja);
+    bottom: -1rem;
+    width: 60%;
+    color: var(--naranja);
+}
+
+.logo {
+    height: 7rem;
+    width: 7rem;
+    transition: 0.3s ease-in-out;
+}
+
+.logo:hover {
+    transform: scale(1.33);
+}
+
+
+
+
+
