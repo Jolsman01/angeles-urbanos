@@ -7,7 +7,7 @@
 /* Imagen de fondo */
 .hero {
     position: relative;
-    background: url("../imagenes/imagen_inicio.jpg") center/cover no-repeat;
+    background: url("../imagenes/imagen_inicio.jpg") center 36%/cover no-repeat;
     width: 110%;
     height: 85vh;
     transition: 0.3s ease-in-out;
@@ -63,7 +63,7 @@
 }
 
 .text-container:hover p:last-child {
-    color: #dd5303;
+    color: #b94c0c;
 }
 
 .text-container p:hover {
