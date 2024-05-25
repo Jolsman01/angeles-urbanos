@@ -1,0 +1,75 @@
+/* Apartados genericos */
+.main section {
+    overflow: hidden;
+    user-select: none;
+}
+
+/* Imagen de fondo */
+.hero {
+    position: relative;
+    background: url("../imagenes/imagen_inicio.jpg") center/cover no-repeat;
+    width: 110%;
+    height: 85vh;
+    transition: 0.3s ease-in-out;
+    overflow: hidden;
+}
+.hero * {
+    position: relative;
+    z-index: 2;
+}
+
+/*  Sombra sobre la imagen de fondo */
+.sombra::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 85vh;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.6) 35%, rgba(0, 0, 0, 0) 50%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Texto principal sobre las imagenes*/
+.text-container {
+    line-height: 10rem;
+    margin-top: 9%;
+    position: absolute;
+    top: 10%;
+    left: 5%;
+    z-index: 3;
+    color: white;
+    transition: 0.3s ease-in-out;
+}
+
+.text-container p {
+    text-transform: uppercase;
+    margin: 0;
+    padding: 0;
+    transform: rotate(-10deg);
+    font-weight: 300;
+    font-size: 10rem;
+    white-space: nowrap;
+    color: var(--naranja);
+    text-shadow: 
+        -5px -5px 0 var(--azul),  
+        5px -5px 0 var(--azul),
+        -5px 5px 0 var(--azul),
+        5px 5px 0 var(--azul);
+    transition: 0.3s ease-in-out;
+}
+
+.text-container:hover {
+    transform: scale(1.2);
+}
+
+.text-container:hover p:last-child {
+    color: #dd5303;
+}
+
+.text-container p:hover {
+    text-shadow: 
+        -5px -5px 0 #17207a,  
+        5px -5px 0 #17207a,
+        -5px 5px 0 #17207a,
+        5px 5px 0 #17207a;
+}
