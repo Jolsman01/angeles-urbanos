@@ -1,5 +1,5 @@
 /* Apartados genericos */
-.main section {
+.figure section {
     overflow: hidden;
     user-select: none;
 }
@@ -7,8 +7,8 @@
 /* Imagen de fondo */
 .hero {
     position: relative;
-    background: url("../imagenes/imagen_inicio.jpg") center 36%/cover no-repeat;
-    background-size: 106%;
+    background: url("../imagenes/imagen_inicio.png") center 36%/cover no-repeat;
+    /* background-size: 106%; */
     width: 100%;
     height: calc(100vh - 7.2rem);
     transition: 0.3s ease-in-out;
@@ -20,6 +20,29 @@
     z-index: 2;
 }
 
+@media screen and (min-width: 1300px) {
+    .hero {
+        background: url("../imagenes/imagen_inicio.png") 20% 36%/cover no-repeat;
+        transform: scale(1.15);
+        
+    }
+}
+
+@media screen and (max-width: 980px) {
+
+    .hero {
+        background: url("../imagenes/imagen_inicio.png") center 36%/cover no-repeat;
+        height: 70rem;
+    }
+
+}
+
+@media screen and (max-width: 767px) {
+    .hero {
+        height: 50rem;
+    }
+}
+
 /*  Sombra sobre la imagen de fondo */
 .sombra::before {
     content: "";
@@ -29,6 +52,27 @@
     background: linear-gradient(to right, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.6) 35%, rgba(0, 0, 0, 0) 50%);
     pointer-events: none;
     z-index: 1;
+}
+
+@media screen and (max-width: 767px) {
+
+    .sombra::before {
+        height: 50rem;
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.6) 35%, rgba(0, 0, 0, 0.1) 100%);
+    }
+}
+
+@media screen and (max-width: 980px) {
+
+    .sombra::before {
+        height: 70rem;
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.6) 35%, rgba(0, 0, 0, 0.1) 100%);
+    }
+
+}
+
+@media screen and (min-width: 1300px) {
+    
 }
 
 /* Texto principal sobre las imagenes*/
@@ -74,4 +118,49 @@
         5px -5px 0 #17207a,
         -5px 5px 0 #17207a,
         5px 5px 0 #17207a;
+}
+
+@media screen and (max-width: 980px) {
+
+
+    .text-container {
+        margin-top: 23%;
+        position: absolute;
+        top: 10%;
+        left: 24%;
+        z-index: 3;
+        color: white;
+        transition: 0.3s ease-in-out;
+    }
+
+    .text-container p {
+        text-align: center;
+        transform: rotate(0deg);
+        margin: 0 auto;
+        
+    }
+
+}
+
+@media screen and (max-width: 767px) {
+
+
+    .text-container {
+        margin-top: 85%;
+        position: absolute;
+        top: 10%;
+        left: 9%;
+        z-index: 3;
+        color: white;
+        transition: 0.3s ease-in-out;
+    }
+
+    .text-container p {
+        text-align: center;
+        transform: rotate(0deg);
+        margin: 0 auto;
+        font-size: 8rem;
+        
+    }
+
 }

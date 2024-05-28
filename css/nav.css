@@ -9,6 +9,43 @@
     user-select: none; /*Solo por cuestión de estetica, desactívalo si querés pero mejor dejalo así */
 }
 
+@media screen and (max-width: 980px ) {
+    .navbar {
+
+        display: flex;
+        flex-direction: column;
+        /* justify-content: space-between; */
+        align-items: center;
+        height: auto;        
+        background: linear-gradient(to bottom, var(--naranja) 0%, var(--azul) 60%);
+    }
+
+    .navbar .nav-links {
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 1rem;
+    }
+}
+
+@media screen and (max-width: 760px ) {
+    .navbar {
+
+        display: flex;
+        flex-direction: column;
+        /* justify-content: space-between; */
+        align-items: center;
+        height: auto;        
+        background: linear-gradient(to bottom, var(--naranja) 0%, var(--azul) 60%);
+    }
+
+    .navbar .nav-links {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+    }
+}
+
 /* Buttons */
 .navbar .nav-links a.btn {
     color: var(--blanco);
@@ -64,6 +101,13 @@
     height: 7rem;
     width: 7rem;
     transition: 0.3s ease-in-out;
+}
+
+@media screen and (max-width: 980px) {
+    
+    .logo {
+        margin-top: 1rem;
+    }
 }
 
 
