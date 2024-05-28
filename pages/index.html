@@ -32,8 +32,8 @@
       </div>
 
       <div class="nav-links">
-        <a href="#" class="btn" >Diseñar</a>
-        <a href="#" class="btn" >colores y telas</a>
+        <a href="#Diseñar" class="btn" >Diseñar</a>
+        <a href="#Colores y telas" class="btn" >colores y telas</a>
         <a href="#" class="btn" >Nosotros</a>
         <a href="#" class="btn" >Contacto</a>
       </div>
@@ -54,7 +54,104 @@
         </div>
       </section>
     </main>
+    
+    <!--Parte para diseñar sin CSS-->
+    <div class="muestra-de-diseño" id="Diseñar">
+      <h1>¡DISEÑEMOS JUNTOS!</h1>
+      <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col">
+          <div class="card">
+            <img src="../imagenes/logos/logo_chomba.png" class="card-img-top" alt="CHOMBA">
+            <div class="card-body">
+              <h5 class="card-title">CHOMBA</h5>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card">
+            <img src="../imagenes/logos/logo_remera_en_o.png" class="card-img-top" alt="REMERA">
+            <div class="card-body">
+              <h5 class="card-title">REMERA</h5>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card">
+            <img src="../imagenes/logos/logo_remera_en_v.png" class="card-img-top" alt="REMERA EN V">
+            <div class="card-body">
+              <h5 class="card-title">REMERA EN V</h5>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card">
+            <img src="../imagenes/logos/logo_campera.png" class="card-img-top" alt="CAMPERA">
+            <div class="card-body">
+              <h5 class="card-title">CAMPERA</h5>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card">
+            <img src="../imagenes/logos/logo_canguro.png" class="card-img-top" alt="CANGURO">
+            <div class="card-body">
+              <h5 class="card-title">CANGURO</h5>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card">
+            <img src="../imagenes/logos/logo_gorra.png" class="card-img-top" alt="GORRAS">
+            <div class="card-body">
+              <h5 class="card-title">GORRAS</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Finaliza parte para diseñar-->
 
-  
+    <!--Inicio del generador de reportes-->
+    <div class="Generador-de-reportes" id="Colores y telas">
+      <div class="cuadrados-naranjas">
+        <div class="cuadro-1">
+           <table>
+            <div>
+              <h4>Formulario de Chombas</h4>
+        
+              <form>
+                <label for="tipoTela">Tipo de tela:</label>
+                <select id="tipoTela" name="tipoTela">
+                  <option value="modal">Modal</option>
+                  <option value="algodon">Algodón</option>
+                  <option value="poliéster">Poliéster</option>
+                </select>
+              
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre">
+              
+                <label for="talle">Talle:</label>
+                <select id="talle" name="talle">
+                  <option value="S">S</option>
+                  <option value="M">M</option>
+                  <option value="L">L</option>
+                  <option value="XL">XL</option>
+                  <option value="XXL">XXL</option>
+                </select>
+              
+                <label for="detalles">Detalles adicionales:</label>
+                <textarea id="detalles" name="detalles"></textarea>
+              
+                <input type="submit" value="Generar informe">
+              </form>
+            </div>
+           </table>
+        </div>
+        </div>
+    </div>
+
+    </div>
+    <script src="../js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   </body>
 </html>

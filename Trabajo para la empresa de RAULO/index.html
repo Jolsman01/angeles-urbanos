@@ -27,8 +27,36 @@
 </button>
 //quiero que el button este en el centro de la pagina//
 </div>
-    
+    <div>
+      <h2>Formulario de Chombas</h2>
 
+      <form>
+        <label for="tipoTela">Tipo de tela:</label>
+        <select id="tipoTela" name="tipoTela">
+          <option value="modal">Modal</option>
+          <option value="algodon">Algodón</option>
+          <option value="poliéster">Poliéster</option>
+        </select>
+      
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre">
+      
+        <label for="talle">Talle:</label>
+        <select id="talle" name="talle">
+          <option value="S">S</option>
+          <option value="M">M</option>
+          <option value="L">L</option>
+          <option value="XL">XL</option>
+          <option value="XXL">XXL</option>
+        </select>
+      
+        <label for="detalles">Detalles adicionales:</label>
+        <textarea id="detalles" name="detalles"></textarea>
+      
+        <input type="submit" value="Generar informe">
+      </form>
+    </div>
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="main.js"></script>
 </body>
