@@ -29,6 +29,7 @@
 }
 
 .efecto_hover {
+    user-select: none;
     transition: 0.17s all linear;
 }
 
