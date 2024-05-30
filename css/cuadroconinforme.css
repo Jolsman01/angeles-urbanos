@@ -1,27 +1,12 @@
-.cuadrodeinforme {
-    font-family: Arial, sans-serif;
-    background-color: #002366; /* Azul de fondo */
-    color: #ffffff; /* Texto blanco */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-}
-.grancuadro {
+.cuadrodeinforme, .cuadrodereporte {
     background-color: #FF7F00; /* Naranja de fondo para el contenedor */
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: space-between;
-    width: 80%;
-    max-width: 900px;
-}
-.primeracolumna {
     width: 45%;
+    max-width: 500px;
 }
-.primeracolumna h3 {
+h3, h5 {
     margin-top: 0;
 }
 .inputone, .pequeños-box {
@@ -31,7 +16,7 @@
     border-radius: 5px;
     margin-bottom: 10px;
 }
-.inputone select, .inputone textarea, .inputone input {
+select, textarea, input {
     width: 100%;
     padding: 10px;
     margin-top: 5px;
@@ -39,7 +24,7 @@
     border-radius: 5px;
     box-sizing: border-box;
 }
-.inputone textarea {
+textarea {
     height: 100px;
     resize: none;
 }
