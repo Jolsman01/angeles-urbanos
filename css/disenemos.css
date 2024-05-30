@@ -1,0 +1,50 @@
+.fondo_disenemos {
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(to bottom, #131b69 0%, var(--azul) 30%, #131b69 80%);
+    margin: 0 auto;
+}
+
+.contenedor {
+    margin: 0 15%;
+}
+
+.titulo {
+
+    display: flex;
+    justify-content: center;
+    margin-top: 4rem;
+    font-size: 6rem;
+    font-weight: 300;
+    color: var(--blanco);
+    white-space: nowrap;
+    
+    text-shadow: 
+        -0.3rem -0.3rem 0 var(--naranja),  
+        0.3rem -0.3rem 0 var(--naranja),
+        -0.3rem 0.3rem 0 var(--naranja),
+        0.3rem 0.3rem 0 var(--naranja);
+}
+
+.efecto_hover {
+    transition: 0.17s all linear;
+}
+
+.efecto_hover:hover {
+    transform: scale(1.2);
+    color: var(--azul);
+}
+
+.m-s {
+    margin: 0 1rem ;
+}
+
+
+.iconos_disenar {
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columnas de ancho igual */
+    grid-auto-rows: minmax(100px, auto); /* Altura mínima de 100px */
+    grid-gap: 20px; /* Espacio entre las celdas */
+    margin: 0 auto; /* Centrar horizontalmente */
+}
