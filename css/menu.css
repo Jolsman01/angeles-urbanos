@@ -1,0 +1,81 @@
+.fondo-naranja {
+    min-height: 80%;
+    border: 1px solid #000;
+    border-radius: 0%;
+    background-color: var(--naranja);
+}
+
+.fondo-naranja-flex {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.fondo-naranja div img {
+    height: 25rem;
+    margin: 1rem 0;
+}
+
+.menu-modelo{
+    display: flex;
+    flex-direction: row;
+}
+
+.menu-modelo label {
+    color: var(--blanco);
+    text-transform: uppercase;
+    font-size: 3rem;
+}
+
+.menu-modelo select {
+    font-size: 3rem;
+    color: var(--blanco);
+    background-color: transparent;
+    border-color: transparent;
+    margin-bottom: 2rem;
+}
+
+.botones-colores {
+    width: 60%;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 2rem;
+    justify-content: space-between;
+}
+
+.boton-color {
+    width: 5rem;
+    height: 5rem;
+    border: 1px solid #000;
+    border-radius: 100%;
+    cursor: pointer;
+}
+
+.boton-color:first-child{
+    background-color: var(--blanco);
+}
+.boton-color:nth-child(2){
+    background-color: var(--negro)
+}
+.boton-color:nth-child(3){
+    background-color: var(--azul)
+}
+.boton-color:nth-child(4){
+    background-color: var(--naranja)
+}
+.boton-color:nth-child(5){
+    background-color: #5c4e4e
+}
+.boton-color:nth-child(6){
+    background-color: rgb(65, 33, 3)
+}
+.boton-color:nth-child(7){
+    background-color: rgb(224, 13, 13)
+}
+.boton-color:nth-child(8){
+    background-color: rgb(54, 131, 207)
+}
+.boton-color:nth-child(9){
+    background-color: #eeff00
+}
