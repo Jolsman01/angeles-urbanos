@@ -19,15 +19,32 @@ header h1 {
 }
 
 .unslidesshow {
-    position: relative;
-    max-width: 100%;
-    margin: auto;
-    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    padding: 20px 0;
+    background: #6B4226;
+}
+
+.unslidesshow img {
+    width: 150px;
+    height: auto;
+    border-radius: 10px;
+}
+
+.losslides {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
 }
 
 .losslides img {
-    width: 100%;
+    width: 150px;
+    height: auto;
     display: none;
+    border-radius: 10px;
 }
 
 .losslides img.active {
@@ -39,6 +56,8 @@ header h1 {
     text-align: center;
     padding: 20px;
     font-size: 1.2em;
+    max-width: 600px;
+    margin: 20px auto;
 }
 
 .mensajeenmedio p {
@@ -50,11 +69,13 @@ header h1 {
     flex-wrap: wrap;
     justify-content: center;
     padding: 20px;
+    gap: 10px;
 }
 
 .lagaleria img {
-    width: 45%;
-    margin: 2.5%;
+    width: 150px;
+    height: auto;
+    border-radius: 10px;
 }
 
 @media (max-width: 600px) {
