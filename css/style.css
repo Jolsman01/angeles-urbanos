@@ -1,10 +1,12 @@
 html {
     font-size: 62.5%; /*Para que cada Rem sea equivalente a 10 px*/
     box-sizing: border-box;
+    scroll-snap-type: y mandatory;
+
 }
 *, *:before, *:after {
     box-sizing: inherit;
-    transform: calc(100vh - )
+    transform: calc(100vh);
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Londrina+Solid:wght@100;300;400;900&display=swap');
@@ -33,6 +35,13 @@ body {
     font-size: 1.6rem;
     line-height: 1.8;
 }
+.one, 
+.two, 
+.three {
+    height: 100vh;
+    scroll-snap-align: start;
+}
+
 h1, h2, h3 {
     font-weight: 900;
     line-height: 1.2;
@@ -68,10 +77,11 @@ img {
     transition: background-color .3s;
     
 }
+ /*
 .btn:hover {
-    /* background-color: var(--gris);
-    color: var(--blanco); */
-}
+    background-color: var(--gris);
+    color: var(--blanco); 
+}*/
 
 /** Utilidades **/
 .text-center {
@@ -83,3 +93,78 @@ img {
 
 
 
+
+::-webkit-scrollbar {
+    width: 12px; 
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: transparent; 
+    background-color: var(--azul); 
+
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--azul); 
+    border-radius: 10px; 
+    border: 3px solid transparent; 
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--azul); 
+  }
+  
+  /* Firefox */
+  * {
+    scrollbar-width: thin; 
+    scrollbar-color: #888 transparent; 
+  }
+  
+  @supports (-ms-overflow-style: none) {
+    * {
+      -ms-overflow-style: none; 
+    }
+  
+    .container::-ms-scrollbar {
+      display: none; 
+    }
+  }
+  
+/* 
+body::-webkit-scrollbar{
+  width: .8rem;
+}
+
+body::-webkit-scrollbar-thumb{
+    background-color:#1b2381;
+    border-radius: 1rem;
+}
+
+body::-webkit-scrollbar-track{
+    color: var(--azul);
+}
+
+body::-webkit-scrollbar-track-piece{
+    background-color: var(--azul); 
+}*/
+
+
+/* @keyframes show{
+    from {
+        opacity: 1;
+        scale: 90%;
+    }
+
+    to {
+        opacity: 1;
+        scale: 100%;
+    }
+} */
+
+/* .one, .two, .three {
+    view-timeline-name: --nashe;
+    view-timeline-axis: block;
+
+    animation-timeline: --nashe;
+    animation-name: show;
+} */
