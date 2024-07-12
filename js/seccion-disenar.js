@@ -182,30 +182,38 @@ document.addEventListener("DOMContentLoaded", function() {
                 <section class="fondo-naranja" style="height: 100%; width: 100%; display: flex; align-items: center; justify-content: center;">
                     <div class="fondo-naranja-flex">
                         <img src="${imageUrl}" alt="${item.toUpperCase()}">
-                        <div class="menu-modelo">
-                            <label for="opciones"></label>
-                            <select id="opciones" name="opciones">
-                                <option value="">MODELO</option>
-                                <option value="A">OPCION A</option>
-                                <option value="B">OPCION B</option>
-                                <option value="C">OPCION C</option>
-                                <option value="D">OPCION D</option>
-                            </select>
-                        </div>
-                        <div class="botones-colores">
-                            <button class="boton-color"></button>
-                            <button class="boton-color"></button>
-                            <button class="boton-color"></button>
-                            <button class="boton-color"></button>
-                            <button class="boton-color"></button>
-                            <button class="boton-color"></button>
-                            <button class="boton-color"></button>
-                            <button class="boton-color"></button>
-                            <button class="boton-color"></button>
+                        <div class="contenedor-boton">
+                        <button class="boton-diseñemos">DISEÑEMOS</button>
                         </div>
                     </div>
                 </section>
             `;
+        const styles = document.createElement('style');
+styles.innerHTML = `
+    .contenedor-boton {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    .boton-diseñemos {
+        background-color: blue;
+        color: orange;
+        border: 5px solid blue;
+        border-radius: 5px;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.3s;
+    }
+
+    .boton-diseñemos:hover {
+        background-color: darkblue;
+        transform: scale(1.05);
+    }
+`;
+document.head.appendChild(styles);
 
             // Añadir el botón de cerrar al nuevo contenido
             modalContent.querySelector('button').addEventListener('click', function() {
