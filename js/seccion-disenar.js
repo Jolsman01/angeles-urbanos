@@ -159,10 +159,10 @@ document.addEventListener("DOMContentLoaded", function() {
                     imageUrl = '../imagenes/imagenes_seccion_disenar/chomba.png';
                     break;
                 case 'remera':
-                    imageUrl = '../imagenes/imagenes_seccion_disenar/remera.png';
+                    imageUrl = '../imagenes/imagenes_seccion_disenar/remera_en_o.png';
                     break;
                 case 'remera v':
-                    imageUrl = '../imagenes/imagenes_seccion_disenar/remera_v.png';
+                    imageUrl = '../imagenes/imagenes_seccion_disenar/remera_en_v.png';
                     break;
                 case 'campera':
                     imageUrl = '../imagenes/imagenes_seccion_disenar/campera.png';
