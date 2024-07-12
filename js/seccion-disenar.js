@@ -152,29 +152,37 @@ document.addEventListener("DOMContentLoaded", function() {
         cuadro.addEventListener('click', function() {
             const item = this.querySelector('h3').innerText;
             let imageUrl = '';
+            let redirigirUrl = '';
 
             // Determine the image URL based on the item text
             switch(item.toLowerCase()) {
                 case 'chomba':
                     imageUrl = '../imagenes/imagenes_seccion_disenar/chomba.png';
+                    redirigirUrl = '#';
                     break;
                 case 'remera':
                     imageUrl = '../imagenes/imagenes_seccion_disenar/remera_en_o.png';
+                    redirigirUrl = '#';
                     break;
                 case 'remera v':
                     imageUrl = '../imagenes/imagenes_seccion_disenar/remera_en_v.png';
+                    redirigirUrl = '#';
                     break;
                 case 'campera':
                     imageUrl = '../imagenes/imagenes_seccion_disenar/campera.png';
+                    redirigirUrl = '#';
                     break;
                 case 'canguro':
                     imageUrl = '../imagenes/imagenes_seccion_disenar/canguro.png';
+                    redirigirUrl = '#';
                     break;
                 case 'gorras':
                     imageUrl = '../imagenes/imagenes_seccion_disenar/gorras.png';
+                    redirigirUrl = '#';
                     break;
                 default:
                     imageUrl = '';
+                    redirigirUrl = '#';
             }
 
             modalContent.innerHTML = `
@@ -219,6 +227,8 @@ document.head.appendChild(styles);
             modalContent.querySelector('button').addEventListener('click', function() {
                 modalContainer.style.display = 'none';
             });
+
+            //agregar función de redireccion al botón diseñemos
 
             // Mostrar el modal
             modalContainer.style.display = 'flex';
