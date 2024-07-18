@@ -102,3 +102,18 @@
   height: 45rem;
   overflow:scroll;
 }
+
+#dynamicOptions label {
+  display: block;
+  margin-top: 10px;
+  font-weight: bold;
+  color: #f46200;
+}
+
+#dynamicOptions input[type="number"] {
+  display: block;
+  margin-top: 5px;
+  padding: 5px;
+  width: 100px;
+  
+}

@@ -40,6 +40,31 @@ function actualizarOpcionesTela() {
     }
 }
 
+function updateOptions() {
+    const select = document.getElementById('ubicacionNombre');
+    const dynamicOptions = document.getElementById('dynamicOptions');
+    dynamicOptions.innerHTML = ''; // clear existing options
+
+    if (select.value === 'Estampados') {
+        dynamicOptions.innerHTML = `
+            <label for="estampados">Cantidad de Estampas:</label>
+            <input type="number" id="estampados" name="estampados" min="0">
+        `;
+    } else if (select.value === 'Bordados') {
+        dynamicOptions.innerHTML = `
+            <label for="bordados">Cantidad de Bordados:</label>
+            <input type="number" id="bordados" name="bordados" min="0">
+        `;
+    } else if (select.value === 'Ambas') {
+        dynamicOptions.innerHTML = `
+            <label for="estampados">Cantidad de Estampados:</label>
+            <input type="number" id="estampados" name="estampados" min="0">
+            <label for="bordados">Cantidad de Bordados:</label>
+            <input type="number" id="bordados" name="bordados" min="0">
+        `;
+    }
+}
+
 // Función para guardar datos en localStorage
 function guardarDatos() {
     const tipoPrenda = document.getElementById('tipoPrenda').value;
