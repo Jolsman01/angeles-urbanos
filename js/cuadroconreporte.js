@@ -89,6 +89,7 @@ function restaurarDatos() {
     const otrosDetalles = localStorage.getItem('otrosDetalles');
 
     if (tipoPrenda) document.getElementById('tipoPrenda').value = tipoPrenda;
+    if (tipoTela) document.getElementById('tipoTela').value = tipoTela;
     if (ubicacionNombre) document.getElementById('ubicacionNombre').value = ubicacionNombre;
     if (nombresTalles) document.getElementById('nombresTalles').value = nombresTalles;
     if (otrosDetalles) document.getElementById('otrosDetalles').value = otrosDetalles;
@@ -123,12 +124,12 @@ function restaurarInforme() {
     if (otrosDetallesText) document.getElementById('otrosDetallesText').innerText = otrosDetallesText;
 
     if (listaTallesNombres) {
-        const listaTallesNombresElement = document.getElementById('listaTallesNombres');
-        listaTallesNombresElement.innerHTML = '';
+        const lista = document.getElementById('listaTallesNombres');
+        lista.innerHTML = '';
         listaTallesNombres.forEach(item => {
             const li = document.createElement('li');
             li.innerText = item;
-            listaTallesNombresElement.appendChild(li);
+            lista.appendChild(li);
         });
     }
 }
