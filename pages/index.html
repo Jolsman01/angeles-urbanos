@@ -145,28 +145,40 @@
                 <option value="rompevientos">Rompevientos</option>
               </select>
             </div>
+
+            <h3>Cantidad de prendas</h3>
+            <div class="inputone">
+              <input type="number" id="cantidadPrendas" min="1" value="1">
+            </div>
+
             <h3>Tipo de tela</h3>
             <div class="inputone">
               <select id="tipoTela">
-                <!-- Opciones se actualizarán dinámicamente -->
+                <!-- Opciones se actualizan dinámicamente según lo que elijan -->
               </select>
             </div>
-            <h3>Cantidad de Logos/Agregados</h3>
-            <div class="inputone">
-              <select id="ubicacionNombre" onchange="updateOptions()">
-                <option value="Estampados">Estampados</option>
-                <option value="Bordados">Bordados</option>
-                <option value="Ambas">Ambas</option>
-              </select>
-            </div>
+
+            <h3>Ubicación de Logos/Agregados</h3>
             <div id="dynamicOptions"></div>
+
+            <h3>Especificaciones de prendas</h3>
+            <div>
+              <input type="radio" id="general" name="generalParticular" value="general">
+              <label for="general">Generales (todas iguales)</label><br>
+              <input type="radio" id="particular" name="generalParticular" value="particular">
+              <label for="particular">Particulares(Cada una diferente)</label>
+            </div>
+
             <h3>Nombres y talles:</h3>
             <div class="inputone">
               <textarea id="nombresTalles" placeholder="Ej: Nombre - Talle&#10;Lucia - S&#10;Eugenia - M&#10;David - L"></textarea>
             </div>
             <h3>Otros detalles:</h3>
             <div class="inputone">
-              <textarea id="otrosDetalles" placeholder="Ej: El número en la espalda tiene que ser en número romano o los nombres deben ir todos en Mayúscula."></textarea>
+              <textarea id="otrosDetalles" placeholder="Ej: Ingrese otros detalles aquí..."></textarea>
+            </div>
+            <div>
+              <button onclick="agregarOtroPedido()">Agregar otra Prenda al mismo pedido</button>
             </div>
         </div>
       

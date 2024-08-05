@@ -289,3 +289,143 @@ window.addEventListener('beforeunload', () => {
     // Eliminar la marca de sesión activa
     sessionStorage.removeItem('isActive');
 });
+
+
+Esto es borrado temporalmente.
+// Función para guardar datos en localStorage
+function guardarDatos() {
+    const tipoPrenda = document.getElementById('tipoPrenda').value;
+    const tipoTela = document.getElementById('tipoTela').value;
+    const ubicacionNombre = document.getElementById('ubicacionNombre').value;
+    const nombresTalles = document.getElementById('nombresTalles').value;
+    const otrosDetalles = document.getElementById('otrosDetalles').value;
+
+    localStorage.setItem('tipoPrenda', tipoPrenda);
+    localStorage.setItem('tipoTela', tipoTela);
+    localStorage.setItem('ubicacionNombre', ubicacionNombre);
+    localStorage.setItem('nombresTalles', nombresTalles);
+    localStorage.setItem('otrosDetalles', otrosDetalles);
+}
+
+// Función para restaurar datos desde localStorage
+function restaurarDatos() {
+    const tipoPrenda = localStorage.getItem('tipoPrenda');
+    const tipoTela = localStorage.getItem('tipoTela');
+    const ubicacionNombre = localStorage.getItem('ubicacionNombre');
+    const nombresTalles = localStorage.getItem('nombresTalles');
+    const otrosDetalles = localStorage.getItem('otrosDetalles');
+
+    if (tipoPrenda) document.getElementById('tipoPrenda').value = tipoPrenda;
+    if (tipoTela) document.getElementById('tipoTela').value = tipoTela;
+    if (ubicacionNombre) document.getElementById('ubicacionNombre').value = ubicacionNombre;
+    if (nombresTalles) document.getElementById('nombresTalles').value = nombresTalles;
+    if (otrosDetalles) document.getElementById('otrosDetalles').value = otrosDetalles;
+}
+
+// Función para guardar el informe en localStorage
+function guardarInforme() {
+    const modeloChomba = document.getElementById('modeloChomba').innerText;
+    const tipoTelaInfo = document.getElementById('tipoTelaInfo').innerText;
+    const ubicacionNombreInfo = document.getElementById('ubicacionNombreInfo').innerText;
+    const otrosDetallesText = document.getElementById('otrosDetallesText').innerText;
+    const listaTallesNombres = Array.from(document.getElementById('listaTallesNombres').children).map(li => li.innerText);
+
+    localStorage.setItem('modeloChomba', modeloChomba);
+    localStorage.setItem('tipoTelaInfo', tipoTelaInfo);
+    localStorage.setItem('ubicacionNombreInfo', ubicacionNombreInfo);
+    localStorage.setItem('otrosDetallesText', otrosDetallesText);
+    localStorage.setItem('listaTallesNombres', JSON.stringify(listaTallesNombres));
+}
+
+// Función para restaurar el informe desde localStorage
+function restaurarInforme() {
+    const modeloChomba = localStorage.getItem('modeloChomba');
+    const tipoTelaInfo = localStorage.getItem('tipoTelaInfo');
+    const ubicacionNombreInfo = localStorage.getItem('ubicacionNombreInfo');
+    const otrosDetallesText = localStorage.getItem('otrosDetallesText');
+    const listaTallesNombres = JSON.parse(localStorage.getItem('listaTallesNombres'));
+
+    if (modeloChomba) document.getElementById('modeloChomba').innerText = modeloChomba;
+    if (tipoTelaInfo) document.getElementById('tipoTelaInfo').innerText = tipoTelaInfo;
+    if (ubicacionNombreInfo) document.getElementById('ubicacionNombreInfo').innerText = ubicacionNombreInfo;
+    if (otrosDetallesText) document.getElementById('otrosDetallesText').innerText = otrosDetallesText;
+
+    if (listaTallesNombres) {
+        const lista = document.getElementById('listaTallesNombres');
+        lista.innerHTML = '';
+        listaTallesNombres.forEach(item => {
+            const li = document.createElement('li');
+            li.innerText = item;
+            lista.appendChild(li);
+        });
+    }
+}
+
+// Función para generar el informe basado en los datos ingresados
+function generarInforme() {
+    const tipoPrenda = document.getElementById('tipoPrenda').value;
+    const cantidadPrendas = document.getElementById('cantidadPrendas').value;
+    const tipoTela = document.getElementById('tipoTela').value;
+    const ubicacionNombre = document.getElementById('ubicacionNombre').value;
+    const nombresTalles = document.getElementById('nombresTalles').value.split('\n').filter(item => item.trim() !== '');
+    const otrosDetalles = document.getElementById('otrosDetalles').value;
+    const prendaGeneralParticular = document.querySelector('input[name="generalParticular"]:checked').value;
+
+    const dynamicOptions = document.getElementById('dynamicOptions');
+    const opciones = dynamicOptions.querySelectorAll('input[type="number"]');
+    let logoInfo = 'En la prenda seleccionada lleva logos en:\n';
+
+    opciones.forEach(opcion => {
+        const cantidad = opcion.value;
+        if (cantidad > 0) {
+            const ubicacion = opcion.id.replace(/_/g, ' ');
+            logoInfo += `- ${ubicacion}: ${cantidad}\n`;
+        }
+    });
+
+    const pedido = {
+        numero: pedidoNumero,
+        tipoPrenda: tipoPrenda,
+        cantidadPrendas: cantidadPrendas,
+        tipoTela: tipoTela,
+        nombresTalles: nombresTalles,
+        otrosDetalles: otrosDetalles,
+        prendaGeneralParticular: prendaGeneralParticular,
+        logoInfo: logoInfo
+    };
+
+    pedidos.push(pedido);
+    actualizarInforme();
+    pedidoNumero++;
+}
+
+// Inicializar opciones de tela y restaurar datos cuando se carga la página
+document.addEventListener('DOMContentLoaded', () => {
+    // Marcar la sesión como activa
+    sessionStorage.setItem('isActive', 'true');
+
+    restaurarDatos();
+    actualizarOpcionesTela();
+    restaurarInforme();
+
+    // Agregar event listeners para guardar datos cuando se cambian los inputs
+    document.getElementById('tipoPrenda').addEventListener('change', () => {
+        actualizarOpcionesTela();
+        guardarDatos();
+    });
+    document.getElementById('tipoTela').addEventListener('change', guardarDatos);
+    document.getElementById('ubicacionNombre').addEventListener('change', guardarDatos);
+    document.getElementById('nombresTalles').addEventListener('input', guardarDatos);
+    document.getElementById('otrosDetalles').addEventListener('input', guardarDatos);
+});
+
+// Limpiar localStorage al cerrar la pestaña o ventana
+window.addEventListener('beforeunload', () => {
+    // Verificar si la sesión está activa
+    if (!sessionStorage.getItem('isActive')) {
+        localStorage.clear();
+    }
+    // Eliminar la marca de sesión activa
+    sessionStorage.removeItem('isActive');
+});
+

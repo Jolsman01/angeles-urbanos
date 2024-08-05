@@ -1,3 +1,37 @@
+let pedidoNumero = 1;
+let pedidos = [];
+
+function updateOptions() {
+    const tipoPrenda = document.getElementById('tipoPrenda').value;
+    const dynamicOptions = document.getElementById('dynamicOptions');
+
+    dynamicOptions.innerHTML = '';
+
+    const ubicaciones = [
+        'Pecho centro',
+        'Pecho derecha',
+        'Pecho izquierda',
+        'Centro',
+        'Frente abajo derecha',
+        'Frente abajo izquierda',
+        'Frente abajo centro',
+        'Mangas',
+        'Espalda Arriba',
+        'Espalda Centro',
+        'Espalda Abajo',
+    ];
+
+    ubicaciones.forEach(ubicacion => {
+        const div = document.createElement('div');
+        div.className = 'opcion-logo';
+        div.innerHTML = `
+            <label for="${ubicacion.replace(/\s+/g, '_')}">${ubicacion}:</label>
+            <input type="number" id="${ubicacion.replace(/\s+/g, '_')}" name="${ubicacion.replace(/\s+/g, '_')}" min="0" value="0">
+        `;
+        dynamicOptions.appendChild(div);
+    });
+}
+
 // Función para actualizar las opciones de tela según el tipo de prenda seleccionado
 function actualizarOpcionesTela() {
     const tipoPrenda = document.getElementById('tipoPrenda').value;
@@ -8,7 +42,7 @@ function actualizarOpcionesTela() {
 
     switch (tipoPrenda) {
         case 'remera':
-            opcionesTela = ['Algodón', 'Jersey Algodón'];
+            opcionesTela = ['Algodón'];
             break;
         case 'remera_sublimacion':
             opcionesTela = ['Poliéster 100%', 'Poliéster/Algodón 50/50'];
@@ -39,125 +73,81 @@ function actualizarOpcionesTela() {
         tipoTela.value = storedTipoTela;
     }
 }
-
-function updateOptions() {
-    const select = document.getElementById('ubicacionNombre');
-    const dynamicOptions = document.getElementById('dynamicOptions');
-    dynamicOptions.innerHTML = ''; // clear existing options
-
-    if (select.value === 'Estampados') {
-        dynamicOptions.innerHTML = `
-            <label for="estampados">Cantidad de Estampas:</label>
-            <input type="number" id="estampados" name="estampados" min="0">
-        `;
-    } else if (select.value === 'Bordados') {
-        dynamicOptions.innerHTML = `
-            <label for="bordados">Cantidad de Bordados:</label>
-            <input type="number" id="bordados" name="bordados" min="0">
-        `;
-    } else if (select.value === 'Ambas') {
-        dynamicOptions.innerHTML = `
-            <label for="estampados">Cantidad de Estampados:</label>
-            <input type="number" id="estampados" name="estampados" min="0">
-            <label for="bordados">Cantidad de Bordados:</label>
-            <input type="number" id="bordados" name="bordados" min="0">
-        `;
-    }
-}
-
-// Función para guardar datos en localStorage
-function guardarDatos() {
-    const tipoPrenda = document.getElementById('tipoPrenda').value;
-    const tipoTela = document.getElementById('tipoTela').value;
-    const ubicacionNombre = document.getElementById('ubicacionNombre').value;
-    const nombresTalles = document.getElementById('nombresTalles').value;
-    const otrosDetalles = document.getElementById('otrosDetalles').value;
-
-    localStorage.setItem('tipoPrenda', tipoPrenda);
-    localStorage.setItem('tipoTela', tipoTela);
-    localStorage.setItem('ubicacionNombre', ubicacionNombre);
-    localStorage.setItem('nombresTalles', nombresTalles);
-    localStorage.setItem('otrosDetalles', otrosDetalles);
-}
-
-// Función para restaurar datos desde localStorage
-function restaurarDatos() {
-    const tipoPrenda = localStorage.getItem('tipoPrenda');
-    const tipoTela = localStorage.getItem('tipoTela');
-    const ubicacionNombre = localStorage.getItem('ubicacionNombre');
-    const nombresTalles = localStorage.getItem('nombresTalles');
-    const otrosDetalles = localStorage.getItem('otrosDetalles');
-
-    if (tipoPrenda) document.getElementById('tipoPrenda').value = tipoPrenda;
-    if (tipoTela) document.getElementById('tipoTela').value = tipoTela;
-    if (ubicacionNombre) document.getElementById('ubicacionNombre').value = ubicacionNombre;
-    if (nombresTalles) document.getElementById('nombresTalles').value = nombresTalles;
-    if (otrosDetalles) document.getElementById('otrosDetalles').value = otrosDetalles;
-}
-
-// Función para guardar el informe en localStorage
-function guardarInforme() {
-    const modeloChomba = document.getElementById('modeloChomba').innerText;
-    const tipoTelaInfo = document.getElementById('tipoTelaInfo').innerText;
-    const ubicacionNombreInfo = document.getElementById('ubicacionNombreInfo').innerText;
-    const otrosDetallesText = document.getElementById('otrosDetallesText').innerText;
-    const listaTallesNombres = Array.from(document.getElementById('listaTallesNombres').children).map(li => li.innerText);
-
-    localStorage.setItem('modeloChomba', modeloChomba);
-    localStorage.setItem('tipoTelaInfo', tipoTelaInfo);
-    localStorage.setItem('ubicacionNombreInfo', ubicacionNombreInfo);
-    localStorage.setItem('otrosDetallesText', otrosDetallesText);
-    localStorage.setItem('listaTallesNombres', JSON.stringify(listaTallesNombres));
-}
-
-// Función para restaurar el informe desde localStorage
-function restaurarInforme() {
-    const modeloChomba = localStorage.getItem('modeloChomba');
-    const tipoTelaInfo = localStorage.getItem('tipoTelaInfo');
-    const ubicacionNombreInfo = localStorage.getItem('ubicacionNombreInfo');
-    const otrosDetallesText = localStorage.getItem('otrosDetallesText');
-    const listaTallesNombres = JSON.parse(localStorage.getItem('listaTallesNombres'));
-
-    if (modeloChomba) document.getElementById('modeloChomba').innerText = modeloChomba;
-    if (tipoTelaInfo) document.getElementById('tipoTelaInfo').innerText = tipoTelaInfo;
-    if (ubicacionNombreInfo) document.getElementById('ubicacionNombreInfo').innerText = ubicacionNombreInfo;
-    if (otrosDetallesText) document.getElementById('otrosDetallesText').innerText = otrosDetallesText;
-
-    if (listaTallesNombres) {
-        const lista = document.getElementById('listaTallesNombres');
-        lista.innerHTML = '';
-        listaTallesNombres.forEach(item => {
-            const li = document.createElement('li');
-            li.innerText = item;
-            lista.appendChild(li);
-        });
-    }
-}
-
-// Función para generar el informe basado en los datos ingresados
 function generarInforme() {
     const tipoPrenda = document.getElementById('tipoPrenda').value;
+    const cantidadPrendas = document.getElementById('cantidadPrendas').value;
     const tipoTela = document.getElementById('tipoTela').value;
-    const ubicacionNombre = document.getElementById('ubicacionNombre').value;
     const nombresTalles = document.getElementById('nombresTalles').value.split('\n').filter(item => item.trim() !== '');
     const otrosDetalles = document.getElementById('otrosDetalles').value;
+    const prendaGeneralParticular = document.querySelector('input[name="generalParticular"]:checked').value;
 
-    document.getElementById('modeloChomba').innerText = `Modelo de indumentaria: ${tipoPrenda.replace(/_/g, ' ').toUpperCase()}`;
-    document.getElementById('tipoTelaInfo').innerText = `Tipo de tela: ${tipoTela.replace(/_/g, ' ')}`;
-    document.getElementById('ubicacionNombreInfo').innerText = `El nombre debe ir: ${ubicacionNombre}`;
-    document.getElementById('otrosDetallesText').innerText = otrosDetalles;
+    const dynamicOptions = document.getElementById('dynamicOptions');
+    const opciones = dynamicOptions.querySelectorAll('input[type="number"]');
+    let logoInfo = 'En la prenda seleccionada lleva logos en:\n';
 
-    const listaTallesNombres = document.getElementById('listaTallesNombres');
-    listaTallesNombres.innerHTML = '';
-    nombresTalles.forEach(item => {
-        const li = document.createElement('li');
-        li.innerText = item;
-        listaTallesNombres.appendChild(li);
+    opciones.forEach(opcion => {
+        const cantidad = opcion.value;
+        if (cantidad > 0) {
+            const ubicacion = opcion.id.replace(/_/g, ' ');
+            logoInfo += `- ${ubicacion}: ${cantidad}\n`;
+        }
     });
 
-    // Guardar datos e informe en localStorage
-    guardarDatos();
-    guardarInforme();
+    const pedido = {
+        numero: pedidoNumero,
+        tipoPrenda: tipoPrenda,
+        cantidadPrendas: cantidadPrendas,
+        tipoTela: tipoTela,
+        nombresTalles: nombresTalles,
+        otrosDetalles: otrosDetalles,
+        prendaGeneralParticular: prendaGeneralParticular,
+        logoInfo: logoInfo
+    };
+
+    pedidos.push(pedido);
+    actualizarInforme();
+    pedidoNumero++;
+}
+
+function actualizarInforme() {
+    const informeContainer = document.getElementById('informeContainer');
+    informeContainer.innerHTML = '';
+
+    pedidos.forEach(pedido => {
+        const pedidoDiv = document.createElement('div');
+        pedidoDiv.className = 'pedido';
+
+        let nombresTallesHTML = '<ul>';
+        pedido.nombresTalles.forEach(item => {
+            nombresTallesHTML += `<li>${item}</li>`;
+        });
+        nombresTallesHTML += '</ul>';
+
+        pedidoDiv.innerHTML = `
+            <h2>Pedido: ${pedido.numero}</h2>
+            <p>Hay ${pedido.cantidadPrendas} de ${pedido.tipoPrenda.replace(/_/g, ' ')}</p>
+            <p>Tipo de tela: ${pedido.tipoTela.replace(/_/g, ' ')}</p>
+            <p>${pedido.logoInfo}</p>
+            <p>Listado de nombres y talles:</p>
+            ${nombresTallesHTML}
+            <p>Otros detalles: ${pedido.otrosDetalles}</p>
+            <p>Las prendas son: ${pedido.prendaGeneralParticular === 'general' ? 'Generales (todas iguales)' : 'Particulares (cada una diferente)'}</p>
+        `;
+
+        informeContainer.appendChild(pedidoDiv);
+    });
+}
+
+function agregarOtroPedido() {
+    // Resetear los campos del formulario
+    document.getElementById('cantidadPrendas').value = '';
+    document.getElementById('nombresTalles').value = '';
+    document.getElementById('otrosDetalles').value = '';
+    document.getElementById('dynamicOptions').innerHTML = '';
+    document.querySelector('input[name="generalParticular"]:checked').checked = false;
+
+    // Agregar un nuevo pedido al cuadro de informe
+    generarInforme();
 }
 
 // Inicializar opciones de tela y restaurar datos cuando se carga la página
@@ -175,7 +165,6 @@ document.addEventListener('DOMContentLoaded', () => {
         guardarDatos();
     });
     document.getElementById('tipoTela').addEventListener('change', guardarDatos);
-    document.getElementById('ubicacionNombre').addEventListener('change', guardarDatos);
     document.getElementById('nombresTalles').addEventListener('input', guardarDatos);
     document.getElementById('otrosDetalles').addEventListener('input', guardarDatos);
 });
@@ -189,3 +178,4 @@ window.addEventListener('beforeunload', () => {
     // Eliminar la marca de sesión activa
     sessionStorage.removeItem('isActive');
 });
+
