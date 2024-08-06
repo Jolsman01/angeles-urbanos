@@ -34,11 +34,11 @@ body {
     font-family: var(--fuentePrincipal);
     font-size: 1.6rem;
     line-height: 1.8;
+    overflow-y: auto;
 }
 .one, 
 .two, 
 .three {
-    height: 100vh;
     scroll-snap-align: start;
 }
 
@@ -90,9 +90,6 @@ img {
 .mt-5 {
     margin-top: 5rem;
 }
-
-
-
 
 ::-webkit-scrollbar {
     width: 12px; 

@@ -32,6 +32,19 @@ function updateOptions() {
     });
 }
 
+function mostrarCamposTalles(esGeneral) {
+    const camposTalles = document.getElementById('camposTalles');
+    const nombresTallesDiv = document.getElementById('nombresTallesDiv');
+
+    if (esGeneral) {
+        camposTalles.style.display = 'block';
+        nombresTallesDiv.style.display = 'none';
+    } else {
+        camposTalles.style.display = 'none';
+        nombresTallesDiv.style.display = 'block';
+    }
+}
+
 // Función para actualizar las opciones de tela según el tipo de prenda seleccionado
 function actualizarOpcionesTela() {
     const tipoPrenda = document.getElementById('tipoPrenda').value;
@@ -110,8 +123,8 @@ function generarInforme() {
 }
 
 function actualizarInforme() {
-    const informeContainer = document.getElementById('informeContainer');
-    informeContainer.innerHTML = '';
+    const informeContainer = document.getElementById('detallesPedido');
+    detallesPedido.innerHTML = '';
 
     pedidos.forEach(pedido => {
         const pedidoDiv = document.createElement('div');
@@ -134,20 +147,20 @@ function actualizarInforme() {
             <p>Las prendas son: ${pedido.prendaGeneralParticular === 'general' ? 'Generales (todas iguales)' : 'Particulares (cada una diferente)'}</p>
         `;
 
-        informeContainer.appendChild(pedidoDiv);
+        detallesPedido.appendChild(pedidoDiv);
     });
 }
 
 function agregarOtroPedido() {
+    generarInforme();
     // Resetear los campos del formulario
+    document.getElementById('tipoPrenda').value = '';
     document.getElementById('cantidadPrendas').value = '';
+    document.getElementById('tipoTela').innerHTML = '';
     document.getElementById('nombresTalles').value = '';
     document.getElementById('otrosDetalles').value = '';
     document.getElementById('dynamicOptions').innerHTML = '';
     document.querySelector('input[name="generalParticular"]:checked').checked = false;
-
-    // Agregar un nuevo pedido al cuadro de informe
-    generarInforme();
 }
 
 // Inicializar opciones de tela y restaurar datos cuando se carga la página
@@ -155,13 +168,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // Marcar la sesión como activa
     sessionStorage.setItem('isActive', 'true');
 
-    restaurarDatos();
     actualizarOpcionesTela();
-    restaurarInforme();
+    updateOptions();
 
     // Agregar event listeners para guardar datos cuando se cambian los inputs
     document.getElementById('tipoPrenda').addEventListener('change', () => {
         actualizarOpcionesTela();
+        updateOptions();
         guardarDatos();
     });
     document.getElementById('tipoTela').addEventListener('change', guardarDatos);

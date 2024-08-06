@@ -129,8 +129,10 @@
         </section>
       </main>
     </section>
+
     <!-- Comienzo del cuadro de reporte -->
-     <section class="three">
+     <div class="container-principal">
+    <section class="three">
       <main class="cuadrodeinforme">
         <div class="container" id="Colores-telas">
           <div class="primeracolumna">
@@ -153,9 +155,7 @@
 
             <h3>Tipo de tela</h3>
             <div class="inputone">
-              <select id="tipoTela">
-                <!-- Opciones se actualizan dinámicamente según lo que elijan -->
-              </select>
+              <select id="tipoTela"></select>
             </div>
 
             <h3>Ubicación de Logos/Agregados</h3>
@@ -169,10 +169,44 @@
               <label for="particular">Particulares(Cada una diferente)</label>
             </div>
 
+            <div id="camposTalles" style="display:none">
+              <h3>Cantidad de cada talle:</h3>
+              <div class="inputone">
+                  <label for="talle10">Talle 10:</label>
+                  <input type="number" id="talle10" min="0" value="0"><br>
+                  <label for="talle12">Talle 12:</label>
+                  <input type="number" id="talle12" min="0" value="0"><br>
+                  <label for="talle14">Talle 14:</label>
+                  <input type="number" id="talle14" min="0" value="0"><br>
+                  <label for="talle16">Talle 16:</label>
+                  <input type="number" id="talle16" min="0" value="0"><br>
+                  <label for="talleS">Talle S:</label>
+                  <input type="number" id="talleS" min="0" value="0"><br>
+                  <label for="talleM">Talle M:</label>
+                  <input type="number" id="talleM" min="0" value="0"><br>
+                  <label for="talleL">Talle L:</label>
+                  <input type="number" id="talleL" min="0" value="0"><br>
+                  <label for="talleXL">Talle XL:</label>
+                  <input type="number" id="talleXL" min="0" value="0"><br>
+                  <label for="talleXXL">Talle XXL:</label>
+                  <input type="number" id="talleXXL" min="0" value="0"><br>
+                  <label for="talleXXXL">Talle XXXL:</label>
+                  <input type="number" id="talleXXXL" min="0" value="0"><br>
+              </div>
+          </div>
+
+          <div id="nombresTallesDiv" style="display:none">
+            <h3>Nombres y talles:</h3>
+            <div class="inputone">
+                <textarea id="nombresTalles" placeholder="Ej: Nombre - Talle - Característica Adicional&#10;Lucia - S - Con nombre&#10;Eugenia - M - Con iniciales&#10;David - L - Sin adicionales"></textarea>
+            </div>
+        </div>
+
             <h3>Nombres y talles:</h3>
             <div class="inputone">
               <textarea id="nombresTalles" placeholder="Ej: Nombre - Talle&#10;Lucia - S&#10;Eugenia - M&#10;David - L"></textarea>
             </div>
+
             <h3>Otros detalles:</h3>
             <div class="inputone">
               <textarea id="otrosDetalles" placeholder="Ej: Ingrese otros detalles aquí..."></textarea>
@@ -188,8 +222,7 @@
               <p id="modeloChomba">Modelo de indumentaria</p>
               <p id="colores">Colores a usar: XX</p>
               <p id="tallesNombres">Talles y nombres:</p>
-              <ul id="listaTallesNombres">
-              </ul>
+              <ul id="listaTallesNombres"></ul>
               <p id="tipoTelaInfo">Tipo de tela:</p>
               <p id="ubicacionNombreInfo">Información de logos: </p>
               <p id="otrosDetallesInfo">Otros detalles:</p>
@@ -200,7 +233,7 @@
       </div>
     </main>
   </section>
-
+</div>
   </body>
   
   <script src="../js/main.js"></script>
