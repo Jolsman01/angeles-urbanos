@@ -429,3 +429,36 @@ window.addEventListener('beforeunload', () => {
     sessionStorage.removeItem('isActive');
 });
 
+<!--COSAS QUE PODRIA AGREGAR-->
+<h3>Fecha de entrega</h3>
+          <div class="inputone">
+            <input type="date" id="fechaEntrega">
+          </div>
+        </div>
+
+<div class="Segundacolumna">
+    <h3>Especificaciones adicionales:</h3>
+    <textarea id="especificacionesAdicionales"></textarea>
+
+    <h3>Adjuntar imagen (opcional):</h3>
+    <div class="inputone">
+      <input type="file" id="imagen" accept="image/*">
+    </div>
+
+    <h3>¿Desea agregar logos adicionales?</h3>
+    <div class="inputone">
+      <input type="radio" id="logoSi" name="logo" value="si" onchange="toggleLogoOptions()">
+      <label for="logoSi">Sí</label>
+      <input type="radio" id="logoNo" name="logo" value="no" onchange="toggleLogoOptions()" checked>
+      <label for="logoNo">No</label>
+    </div>
+
+    <div id="logoOptions" style="display:none">
+      <div class="inputone">
+        <input type="file" id="logo1" accept="image/*">
+      </div>
+      <div class="inputone">
+        <input type="file" id="logo2" accept="image/*">
+      </div>
+    </div>
+  </div>
