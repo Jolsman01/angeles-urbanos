@@ -190,9 +190,16 @@ document.addEventListener("DOMContentLoaded", function() {
                 <section class="fondo-naranja" style="height: 100%; width: 100%; display: flex; align-items: center; justify-content: center;">
                     <div class="fondo-naranja-flex">
                         <img src="${imageUrl}" alt="${item.toUpperCase()}">
-                        <div class="contenedor-boton">
-                        <button class="boton-diseñemos">DISEÑEMOS</button>
-                        </div>
+                        <div class="menu-modelo">
+                        <label for="opciones"></label>
+                        <select id="opciones" name="opciones">
+        <option value="">MODELO</option>
+        <option value="A">OPCION A</option>
+        <option value="B">OPCION B</option>
+        <option value="C">OPCION C</option>
+        <option value="D">OPCION D</option>
+    </select>
+</div>
                     </div>
                 </section>
             `;
