@@ -462,3 +462,40 @@ window.addEventListener('beforeunload', () => {
       </div>
     </div>
   </div>
+
+
+  <h3>Especificaciones de prendas</h3>
+            <div>
+              <input type="radio" id="general" name="generalParticular" value="general">
+              <label for="general">Generales (todas iguales)</label><br>
+              <input type="radio" id="particular" name="generalParticular" value="particular">
+              <label for="particular">Particulares(Cada una diferente)</label>
+            </div>
+
+            <div id="nombresTallesDiv" style="display:none">
+                <h3>Nombres y talles:</h3>
+                <div class="inputone">
+                    <textarea id="nombresTalles" placeholder="Ej: Nombre - Talle - Característica Adicional&#10;Lucia - S - Con nombre&#10;Eugenia - M - Con iniciales&#10;David - L - Sin adicionales"></textarea>
+                </div>
+            </div>
+            
+            <h3>Nombres y talles:</h3>
+            <div class="inputone">
+              <textarea id="nombresTalles" placeholder="Ej: Nombre - Talle&#10;Lucia - S&#10;Eugenia - M&#10;David - L"></textarea>
+            </div>
+
+            function generarInformeFinal() {
+                const seleccion = document.querySelector('input[name="generalParticular"]:checked').value;
+            
+                if (seleccion === 'general') {
+                    if (validarGenerales()) {
+                        generarInformeGenerales();
+                    }
+                } else if (seleccion === 'particular') {
+                    if (validarParticulares()) {
+                        generarInformeParticulares();
+                    }
+                }
+            }
+            
+            

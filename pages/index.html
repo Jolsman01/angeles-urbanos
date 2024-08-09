@@ -150,7 +150,7 @@
 
             <h3>Cantidad de prendas</h3>
             <div class="inputone">
-              <input type="number" id="cantidadPrendas" min="1" value="1">
+              <input type="number" id="cantidadPrendas" min="1" value="1" onchange="actualizarFormulario()">
             </div>
 
             <h3>Tipo de tela</h3>
@@ -161,12 +161,28 @@
             <h3>Ubicación de Logos/Agregados</h3>
             <div id="dynamicOptions"></div>
 
-            <h3>Especificaciones de prendas</h3>
             <div>
-              <input type="radio" id="general" name="generalParticular" value="general">
-              <label for="general">Generales (todas iguales)</label><br>
-              <input type="radio" id="particular" name="generalParticular" value="particular">
-              <label for="particular">Particulares(Cada una diferente)</label>
+              <h3>Especificaciones de prendas</h3>
+              <div>
+                <input type="radio" id="general" name="generalParticular" value="general" onchange="mostrarFormulario()">
+                <label for="general">Generales (todas iguales)</label><br>
+                <input type="radio" id="particular" name="generalParticular" value="particular" onchange="mostrarFormulario()">
+                <label for="particular">Particulares (cada una diferente)</label>
+              </div>
+              
+              <!-- Contenedor para prendas generales -->
+              <div id="formGenerales" style="display: none;">
+                <h3>Cantidad de cada talle:</h3>
+                <!-- Aquí agregaremos los inputs de talles dinámicamente -->
+                <div id="tallesGenerales"></div>
+              </div>
+              
+              <!-- Contenedor para prendas particulares -->
+              <div id="formParticulares" style="display: none;">
+                <h3>Especificaciones de cada prenda:</h3>
+                <!-- Aquí agregaremos los formularios individuales de cada prenda dinámicamente -->
+                <div id="especificacionesParticulares"></div>
+              </div>
             </div>
 
             <div id="camposTalles" style="display:none">
@@ -195,22 +211,22 @@
               </div>
           </div>
 
-          <div id="nombresTallesDiv" style="display:none">
-            <h3>Nombres y talles:</h3>
-            <div class="inputone">
-                <textarea id="nombresTalles" placeholder="Ej: Nombre - Talle - Característica Adicional&#10;Lucia - S - Con nombre&#10;Eugenia - M - Con iniciales&#10;David - L - Sin adicionales"></textarea>
-            </div>
-        </div>
+          <h3>Fecha de Pedido</h3>
+          <div class="inputone">
+            <input type="date" id="fechaEntrega">
+          </div>
 
-            <h3>Nombres y talles:</h3>
-            <div class="inputone">
-              <textarea id="nombresTalles" placeholder="Ej: Nombre - Talle&#10;Lucia - S&#10;Eugenia - M&#10;David - L"></textarea>
-            </div>
-
+          
             <h3>Otros detalles:</h3>
             <div class="inputone">
               <textarea id="otrosDetalles" placeholder="Ej: Ingrese otros detalles aquí..."></textarea>
             </div>
+
+            <h3>Nombre del Usuario</h3>
+                    <div class="inputone">
+                        <input type="text" id="username" placeholder="Ingrese su nombre">
+                    </div>
+
             <div>
               <button onclick="agregarOtroPedido()">Agregar otra Prenda al mismo pedido</button>
             </div>
@@ -229,6 +245,7 @@
               <p id="otrosDetallesText"></p>
             </div>
             <button class="unnuevo-button" onclick="generarInforme()">Generar informe</button>
+
         </div>
       </div>
     </main>
@@ -241,4 +258,6 @@
     <script src="../js/seccion-disenar.js"></script>
     <script src="../js/cuadroconreporte.js"></script>
     <script src="../js/seccion-nosotros.js"></script>
-</html>
+    <script src="../js/Pruebadefuncionalidad.js"></script>
+
+    </html>
