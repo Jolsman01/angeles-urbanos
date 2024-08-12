@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- Identificación del pedido -->
+<input type="text" id="nombreUsuario" placeholder="Nombre del Usuario">
+<input type="date" id="fechaPedido">
+<div id="identificadorPedido"></div>
+
+<!-- Formulario para agregar prendas -->
+<select id="tipoPrenda">
+    <option value="chomba">Chomba</option>
+    <option value="gorra">Gorra</option>
+    <!-- Agrega más opciones según sea necesario -->
+</select>
+<input type="number" id="cantidad" placeholder="Cantidad">
+<input type="text" id="talla" placeholder="Talla">
+<button id="agregarPrendaBtn">Agregar otra prenda al mismo pedido</button>
+
+<!-- Informe -->
+<table id="informe">
+    <tr>
+        <th>Tipo de Prenda</th>
+        <th>Cantidad</th>
+        <th>Talla</th>
+    </tr>
+</table>
+
+</body>
+<script>
+    // Función para generar el ID de pedido automáticamente
+function generarIdentificadorPedido() {
+    const nombreUsuario = document.getElementById('nombreUsuario').value;
+    const fechaPedido = document.getElementById('fechaPedido').value;
+    
+    if (nombreUsuario && fechaPedido) {
+        const identificador = `${nombreUsuario}_${fechaPedido}`;
+        document.getElementById('identificadorPedido').innerText = identificador;
+    }
+}
+
+// Evento que se ejecuta cuando el usuario o la fecha cambian
+document.getElementById('nombreUsuario').addEventListener('input', generarIdentificadorPedido);
+document.getElementById('fechaPedido').addEventListener('input', generarIdentificadorPedido);
+// Función para agregar una prenda al pedido actual
+function agregarPrendaAlPedido() {
+    const tipoPrenda = document.getElementById('tipoPrenda').value;
+    const cantidad = document.getElementById('cantidad').value;
+    const talla = document.getElementById('talla').value;
+
+    // Aquí actualizas el informe en la segunda columna
+    const informe = document.getElementById('informe');
+    const nuevaLinea = document.createElement('tr');
+
+    nuevaLinea.innerHTML = `
+        <td contenteditable="true">${tipoPrenda}</td>
+        <td contenteditable="true">${cantidad}</td>
+        <td contenteditable="true">${talla}</td>
+    `;
+
+    informe.appendChild(nuevaLinea);
+}
+
+// Evento para agregar una prenda al hacer clic en "Agregar otra prenda al mismo pedido"
+document.getElementById('agregarPrendaBtn').addEventListener('click', agregarPrendaAlPedido);
+
+</script>
+</html>

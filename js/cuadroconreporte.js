@@ -1,5 +1,5 @@
-let pedidoNumero = 1;
-let pedidos = [];
+let pedidoNumero = parseInt(localStorage.getItem('pedidoNumero')) || 1;
+let pedidos = JSON.parse(localStorage.getItem('pedidos')) || [];
 
 function updateOptions() {
     const tipoPrenda = document.getElementById('tipoPrenda').value;
@@ -174,6 +174,11 @@ function validarParticulares() {
         }
     }
     return true;
+}
+
+function agregarOtroPedido() {
+    generarInforme();
+    pedidoNumero = parseInt(localStorage.getItem('pedidoNumero')) || pedidoNumero;
 }
 
 // Guardar datos en el almacenamiento local
