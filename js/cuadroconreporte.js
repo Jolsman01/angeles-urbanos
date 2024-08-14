@@ -1,5 +1,7 @@
-let pedidoNumero = parseInt(localStorage.getItem('pedidoNumero')) || 1;
-let pedidos = JSON.parse(localStorage.getItem('pedidos')) || [];
+let usuarioNombre = localStorage.getItem('usuarioNombre') || 'Usuario';  // Nombre del usuario
+let pedidoNumero = parseInt(localStorage.getItem('pedidoNumero')) || 1;  // Número de pedido actual
+let pedidos = JSON.parse(localStorage.getItem('pedidos')) || [];  // Pedidos existentes en localStorage
+let pedidoId = `${usuarioNombre}_${new Date().toISOString().split('T')[0]}_${pedidoNumero}`;  // Generar el ID del pedido
 
 function updateOptions() {
     const tipoPrenda = document.getElementById('tipoPrenda').value;
@@ -96,7 +98,7 @@ function generarCamposGenerales() {
     const tallesGenerales = document.getElementById('tallesGenerales');
     tallesGenerales.innerHTML = '';  // Limpiar campos anteriores
 
-    const talles = ['Talle 10', 'Talle 12', 'Talle 14', 'Talle 16', 'Talle S', 'Talle M', 'Talle L', 'Talle XL', 'Talle XXL', 'Talle XXXL'];
+    const talles = ['Talle 10 (44x59)', 'Talle 12 (46x61)', 'Talle 14 (48x63)', 'Talle 16 (50x67)', 'Talle S/P (52x69)', 'Talle M (54x72)', 'Talle L (56x73)', 'Talle XL (58x74)', 'Talle XXL (60x78)'];
 
     talles.forEach(talle => {
         const div = document.createElement('div');
@@ -177,8 +179,12 @@ function validarParticulares() {
 }
 
 function agregarOtroPedido() {
-    generarInforme();
-    pedidoNumero = parseInt(localStorage.getItem('pedidoNumero')) || pedidoNumero;
+    generarInforme();  // Generar informe antes de agregar otra prenda
+    pedidoNumero++;  // Incrementar el número de pedido
+    pedidoId = `${usuarioNombre}_${new Date().toISOString().split('T')[0]}_${pedidoNumero}`;  // Actualizar el ID del pedido
+    localStorage.setItem('pedidoNumero', pedidoNumero);  // Guardar el nuevo número de pedido
+    localStorage.setItem('pedidoId', pedidoId);  // Guardar el nuevo ID del pedido
+    limpiarFormulario();  // Limpiar las opciones de la prenda previa
 }
 
 // Guardar datos en el almacenamiento local
@@ -187,6 +193,18 @@ function guardarDatos() {
     localStorage.setItem('tipoTela', document.getElementById('tipoTela').value);
     localStorage.setItem('pedidoNumero', pedidoNumero);
     localStorage.setItem('pedidos', JSON.stringify(pedidos));
+    localStorage.setItem('pedidoId', pedidoId);
+    localStorage.setItem('usuarioNombre', usuarioNombre);
+}
+
+// Limpiar formulario para agregar otra prenda
+function limpiarFormulario() {
+    document.getElementById('tipoPrenda').value = '';
+    document.getElementById('tipoTela').value = '';
+    document.getElementById('cantidadPrendas').value = '';
+    document.getElementById('otrosDetalles').value = '';
+    document.getElementById('dynamicOptions').innerHTML = '';  // Limpiar opciones dinámicas
+    document.querySelector('input[name="generalParticular"]:checked').checked = false;  // Limpiar la selección de General/Particular
 }
 
 function generarInforme() {
@@ -241,12 +259,10 @@ function generarInforme() {
         nombresTalles: nombresTalles
     };
 
-    // Agrega el pedido al array
     pedidos.push(pedido);
-    actualizarInforme(); // Actualiza la columna de informes
-    pedidoNumero++; // Incrementa el número de pedido
+    actualizarInforme();  // Actualiza la columna de informes
 
-    guardarDatos(); // Guarda los datos actualizados en el localStorage
+    guardarDatos();  // Guarda los datos actualizados en el localStorage
 }
 
 // Actualizar la columna de detalles del pedido
@@ -289,6 +305,18 @@ function actualizarInforme() {
 
         detallesPedido.appendChild(pedidoDiv);
     });
+}
+
+// Función para descargar el pedido en PDF
+function descargarPedidoPDF() {
+    const informeContainer = document.getElementById('informeContainer');
+    const doc = new jsPDF();
+
+    doc.fromHTML(informeContainer.innerHTML, 10, 10, {
+        'width': 180
+    });
+
+    doc.save(`${pedidoId}.pdf`);
 }
 
 // Inicializar opciones de tela y restaurar datos cuando se carga la página
