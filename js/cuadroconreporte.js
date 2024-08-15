@@ -322,32 +322,22 @@ function actualizarInforme() {
 });
 }
 
+function downloadPDF() {
+    // Seleccionamos el contenido de la segunda columna
+    var element = document.querySelector('.pequeños-box');
 
-document.getElementById('download-pdf').addEventListener('click', function() {
-    const { jsPDF } = window.jspdf;  // Asegurarte de que jsPDF esté disponible correctamente
-    const doc = new jsPDF();
-    
-    const detallesPedido = document.getElementById('detallesPedido');
-    // Verificar si detallesPedido tiene contenido
-    if (detallesPedido.innerHTML.trim() === '') {
-        alert('No hay información para descargar.');
-        return;
-    }
+    // Configuración de html2pdf
+    var options = {
+        margin:       0.5,
+        filename:     'pedido.pdf',
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 2 },
+        jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+    };
 
-    const lines = detallesPedido.innerText.split('\n');
-    let yOffset = 10;  // Espaciado inicial
-
-    lines.forEach(line => {
-        doc.text(line, 10, yOffset);
-        yOffset += 10;  // Espaciado entre líneas
-    });
-    // Guardar el PDF con un nombre que incluya la fecha y el nombre de usuario
-    const nombreUsuario = document.getElementById('username').value;
-    const fechaEntrega = document.getElementById('fechaEntrega').value;
-    doc.save(`pedido_${nombreUsuario}_${fechaEntrega}.pdf`);
-});
-
-
+    // Generamos el PDF
+    html2pdf().from(element).set(options).save();
+}
 
 // Inicializar opciones de tela y restaurar datos cuando se carga la página
 document.addEventListener('DOMContentLoaded', () => {
