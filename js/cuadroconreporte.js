@@ -180,12 +180,12 @@ function validarParticulares() {
 
 function agregarOtroPedido() {
     generarInforme();  // Generar informe antes de agregar otra prenda
-    pedidoNumero++;  // Incrementar el número de pedido
-    pedidoId = `${usuarioNombre}_${new Date().toISOString().split('T')[0]}_${pedidoNumero}`;  // Actualizar el ID del pedido
-    localStorage.setItem('pedidoNumero', pedidoNumero);  // Guardar el nuevo número de pedido
-    localStorage.setItem('pedidoId', pedidoId);  // Guardar el nuevo ID del pedido
     limpiarFormulario();  // Limpiar las opciones de la prenda previa
+    updateOptions();
+    actualizarInforme();  // Actualizar la segunda columna con la información más reciente
+    // Incrementar el número de pedido y actualizar el ID
 }
+
 
 // Guardar datos en el almacenamiento local
 function guardarDatos() {
@@ -215,9 +215,13 @@ function generarInforme() {
     const otrosDetalles = document.getElementById('otrosDetalles').value;
     const fechaEntrega = document.getElementById('fechaEntrega').value;
     const prendaGeneralParticular = document.querySelector('input[name="generalParticular"]:checked').value;
-    
+    const nombreUsuario = document.getElementById('username').value;
+
+    // Generar ID único para el pedido basado en el nombre y la fecha
+    pedidoId = `${nombreUsuario}_${fechaEntrega}_${pedidoNumero}`;
+
     // Comprobar si todos los campos obligatorios están llenos
-    if (!tipoPrenda || !cantidadPrendas || !tipoTela || !otrosDetalles ||!fechaEntrega || !prendaGeneralParticular) {
+    if (!tipoPrenda || !cantidadPrendas || !tipoTela || !otrosDetalles ||!fechaEntrega || !prendaGeneralParticular || !nombreUsuario) {
         alert("Por favor, complete todos los campos antes de generar el informe.");
         return;
     }
@@ -248,6 +252,8 @@ function generarInforme() {
 
     // Crea un pedido
     const pedido = {
+        nombreUsuario: nombreUsuario,  // Almacenar el nombre de usuario
+        pedidoId: pedidoId,  // Almacenar el ID del pedido
         numero: pedidoNumero,
         tipoPrenda: tipoPrenda,
         cantidadPrendas: cantidadPrendas,
@@ -259,65 +265,89 @@ function generarInforme() {
         nombresTalles: nombresTalles
     };
 
+    // Revisar si el nombre de usuario o la fecha cambian
+    if (localStorage.getItem('usuarioNombre') !== nombreUsuario || localStorage.getItem('fechaEntrega') !== fechaEntrega) {
+        pedidos = [];  // Limpiar el array de pedidos si el usuario o la fecha cambian
+        pedidoNumero = 1;  // Reiniciar el número de pedido
+    }
+
     pedidos.push(pedido);
     actualizarInforme();  // Actualiza la columna de informes
-
-    guardarDatos();  // Guarda los datos actualizados en el localStorage
+    guardarDatos(); // Guarda los datos actualizados en el localStorage
+    pedidoNumero++;
+    localStorage.setItem('pedidoNumero', pedidoNumero);  // Guardar el nuevo número de pedido
 }
 
-// Actualizar la columna de detalles del pedido
 function actualizarInforme() {
     const detallesPedido = document.getElementById('detallesPedido');
-    detallesPedido.innerHTML = '';  // Limpiar el contenido anterior
+    detallesPedido.innerHTML = '';  // Limpiar el contenido anterior para evitar duplicaciones
 
+    // Obtener el último pedido agregado
     pedidos.forEach(pedido => {
         const pedidoDiv = document.createElement('div');
         pedidoDiv.className = 'pedido';
 
-        let nombresTallesHTML = '<ul>';
-        if (pedido.prendaGeneralParticular === 'general') {
-            const tallesGenerales = document.getElementById('tallesGenerales').getElementsByTagName('input');
-            for (let i = 0; i < tallesGenerales.length; i++) {
-                const cantidadTalle = parseInt(tallesGenerales[i].value) || 0;
-                if (cantidadTalle > 0) {
-                    nombresTallesHTML += `<li>${tallesGenerales[i].id.replace(/_/g, ' ')}: ${cantidadTalle}</li>`;
-                }
+    let nombresTallesHTML = '<ul>';
+    if (pedido.prendaGeneralParticular === 'general') {
+        const tallesGenerales = document.getElementById('tallesGenerales').getElementsByTagName('input');
+        for (let i = 0; i < tallesGenerales.length; i++) {
+            const cantidadTalle = parseInt(tallesGenerales[i].value) || 0;
+            if (cantidadTalle > 0) {
+                nombresTallesHTML += `<li>${tallesGenerales[i].id.replace(/_/g, ' ')}: ${cantidadTalle}</li>`;
             }
-        } else if (pedido.prendaGeneralParticular === 'particular') {
-            pedido.nombresTalles.forEach(item => {
-                nombresTallesHTML += `<li>${item}</li>`;
-            });
         }
+    } else if (pedido.prendaGeneralParticular === 'particular') {
+        pedido.nombresTalles.forEach(item => {
+            nombresTallesHTML += `<li>${item}</li>`;
+        });
+    }
 
-        nombresTallesHTML += '</ul>';
+    nombresTallesHTML += '</ul>';
 
-        pedidoDiv.innerHTML = `
-            <h2>Pedido: ${pedido.numero}</h2>
-            <p>Tipo de prenda: ${pedido.tipoPrenda.replace(/_/g, ' ')}</p>
-            <p>Cantidad de prendas: ${pedido.cantidadPrendas}</p>
-            <p>Tipo de tela: ${pedido.tipoTela.replace(/_/g, ' ')}</p>
-            <p>Fecha de entrega: ${pedido.fechaEntrega}</p>
-            <p>${pedido.logoInfo}</p>
-            <p>Otros detalles: ${pedido.otrosDetalles}</p>
-            <p>Las prendas son: ${pedido.prendaGeneralParticular === 'general' ? 'Generales (todas iguales)' : 'Particulares (cada una diferente)'}</p>
-            ${nombresTallesHTML}
-        `;
+    pedidoDiv.innerHTML = `
+        <h2>Pedido: ${pedido.numero}</h2>
+        <p>Nombre de Usuario: ${pedido.nombreUsuario}</p>
+        <p>Fecha de Entrega: ${pedido.fechaEntrega}</p>
+        <p>Tipo de prenda: ${pedido.tipoPrenda.replace(/_/g, ' ')}</p>
+        <p>Cantidad de prendas: ${pedido.cantidadPrendas}</p>
+        <p>Tipo de tela: ${pedido.tipoTela.replace(/_/g, ' ')}</p>
+        <p>${pedido.logoInfo}</p>
+        <p>Otros detalles: ${pedido.otrosDetalles}</p>
+        <p>Las prendas son: ${pedido.prendaGeneralParticular === 'general' ? 'Generales (todas iguales)' : 'Particulares (cada una diferente)'}</p>
+        ${nombresTallesHTML}
+    `;
 
-        detallesPedido.appendChild(pedidoDiv);
-    });
+    // Agregar el nuevo pedido a la columna de detalles
+    detallesPedido.appendChild(pedidoDiv);
+});
 }
 
-// Función para descargar el pedido en PDF
-function descargarPedidoPDF() {
-    const informeContainer = document.getElementById('informeContainer');
+
+document.getElementById('download-pdf').addEventListener('click', function() {
+    const { jsPDF } = window.jspdf;  // Asegurarte de que jsPDF esté disponible correctamente
     const doc = new jsPDF();
+    
+    const detallesPedido = document.getElementById('detallesPedido');
+    // Verificar si detallesPedido tiene contenido
+    if (detallesPedido.innerHTML.trim() === '') {
+        alert('No hay información para descargar.');
+        return;
+    }
 
-    doc.fromHTML(informeContainer.innerHTML, 10, 10, {
-        'width': 180
+    const lines = detallesPedido.innerText.split('\n');
+    let yOffset = 10;  // Espaciado inicial
+
+    lines.forEach(line => {
+        doc.text(line, 10, yOffset);
+        yOffset += 10;  // Espaciado entre líneas
     });
+    // Guardar el PDF con un nombre que incluya la fecha y el nombre de usuario
+    const nombreUsuario = document.getElementById('username').value;
+    const fechaEntrega = document.getElementById('fechaEntrega').value;
+    doc.save(`pedido_${nombreUsuario}_${fechaEntrega}.pdf`);
+});
 
-    doc.save(`${pedidoId}.pdf`);
-}
+
 
 // Inicializar opciones de tela y restaurar datos cuando se carga la página
 document.addEventListener('DOMContentLoaded', () => {

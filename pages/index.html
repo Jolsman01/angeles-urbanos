@@ -150,7 +150,7 @@
 
             <h3>Cantidad de prendas</h3>
             <div class="inputone">
-              <input type="number" id="cantidadPrendas" min="1" value="1" onchange="actualizarFormulario()">
+              <input type="number" id="cantidadPrendas" min="1" value="1">
             </div>
 
             <h3>Tipo de tela</h3>
@@ -163,7 +163,7 @@
 
             <div>
               <h3>Especificaciones de prendas</h3>
-              <div>
+              <div id="selectorpartgener">
                 <input type="radio" id="general" name="generalParticular" value="general" onchange="mostrarFormulario()">
                 <label for="general">Generales (todas iguales)</label><br>
                 <input type="radio" id="particular" name="generalParticular" value="particular" onchange="mostrarFormulario()">
@@ -228,7 +228,7 @@
                     </div>
 
             <div>
-              <button onclick="agregarOtroPedido()">Agregar otra Prenda al mismo pedido</button>
+              <button class="unnuevo-button" onclick="agregarOtroPedido()">Agregar otra Prenda al mismo pedido</button>
             </div>
         </div>
 
@@ -245,8 +245,7 @@
               <p id="otrosDetallesText"></p>
             </div>
             <button class="unnuevo-button" onclick="generarInforme()">Generar informe</button>
-            <button id="download-pdf">Descargar Pedido en PDF</button>
-
+            <button class="botondepdf" id= "download-pdf" >Descargar Pedido en PDF</button>
         </div>
       </div>
     </main>
@@ -257,7 +256,7 @@
   <script src="../js/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="../js/seccion-disenar.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
     <script src="../js/cuadroconreporte.js"></script>
-    <script src="../js/Pruebadefuncionalidad.js"></script>
-
+    
     </html>
