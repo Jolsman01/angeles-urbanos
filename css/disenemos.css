@@ -131,3 +131,39 @@
     margin: 0;
     text-transform: capitalize;
 }
+
+/* Estiliza el select */
+#opciones {
+    background-color: #0400ef;  /* Color de fondo naranja */
+    color: white;  /* Color del texto */
+    border: none;  /* Sin bordes */
+    padding: 10px;  /* Espaciado interno */
+    font-size: 16px;  /* Tamaño de la fuente */
+    border-radius: 5px;  /* Bordes redondeados */
+    outline: none;  /* Quitar el contorno al enfocarse */
+    appearance: none;  /* Eliminar el estilo nativo del select en algunos navegadores */
+    cursor: pointer;  /* Cursor de mano al pasar el ratón */
+    width: 150px;  /* Ancho fijo */
+    text-align: center;  /* Centrar el texto */
+}
+
+/* Cambiar el icono de flecha del select en algunos navegadores */
+#opciones::after {
+    content: '\25BC';  /* Icono de flecha hacia abajo */
+    position: absolute;
+    right: 10px;
+    pointer-events: none;
+}
+
+/* Estilo básico para las opciones, pero limitado */
+#opciones option {
+    background-color: rgb(82, 126, 245);
+    color: #030bfb;
+    font-size: 16px;
+    padding: 10px;
+}
+
+#opciones {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  /* Sombra */
+    border: 1px solid #ccc;  /* Bordes ligeros */
+}
