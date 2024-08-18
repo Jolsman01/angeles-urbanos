@@ -1096,3 +1096,93 @@ actualizarInforme();  // Actualiza la columna de informes
 guardarDatos(); // Guarda los datos actualizados en el localStorage
 pedidoNumero++;
 localStorage.setItem('pedidoNumero', pedidoNumero);  // Guardar el nuevo número de pedido
+
+
+// Agregar información sobre logos/agregados
+    const dynamicOptions = document.getElementById('dynamicOptions');
+    const opciones = dynamicOptions.querySelectorAll('input[type="number"]');
+    let logoInfo = 'Ubicaciones seleccionadas:\n';
+
+    opciones.forEach(opcion => {
+        const cantidad = opcion.value;
+        if (cantidad > 0) {
+            const ubicacion = opcion.id.replace(/_/g, ' ');
+            logoInfo += `- ${ubicacion}: ${cantidad}\n`;
+        }
+    });
+
+    // Variable para almacenar nombres y talles si es prenda particular
+    let nombresTalles = [];
+
+    if (prendaGeneralParticular === 'particular') {
+        for (let i = 1; i <= cantidadPrendas; i++) {
+            const talle = document.getElementById(`talle${i}`).value;
+            const nombreLogo = document.getElementById(`nombreLogo${i}`).value;
+            nombresTalles.push(`Prenda ${i}: Talle ${talle}, Nombre/Logo: ${nombreLogo}`);
+        }
+    }
+
+    // Crea un pedido
+    const pedido = {
+        nombreUsuario: nombreUsuario,  // Almacenar el nombre de usuario
+        pedidoId: pedidoId,  // Almacenar el ID del pedido
+        numero: pedidoNumero,
+        tipoPrenda: tipoPrenda,
+        cantidadPrendas: cantidadPrendas,
+        tipoTela: tipoTela,
+        prendaGeneralParticular: prendaGeneralParticular,
+        logoInfo: logoInfo,
+        otrosDetalles: otrosDetalles,
+        fechaEntrega: fechaEntrega,
+        nombresTalles: nombresTalles
+    };
+
+   // Guardar el pedido en el array de pedidos
+   pedidos.push(pedido);
+
+   // Guardar el array actualizado en el localStorage
+   localStorage.setItem('pedidos', JSON.stringify(pedidos));
+
+   // Actualizar la segunda columna con el nuevo informe
+   actualizarInforme();
+
+   // Incrementar el número de pedido y actualizar el ID
+   pedidoNumero++;
+   localStorage.setItem('pedidoNumero', pedidoNumero);
+}
+
+
+let nombresTallesHTML = '<ul>';
+    if (pedido.prendaGeneralParticular === 'general') {
+        const tallesGenerales = document.getElementById('tallesGenerales').getElementsByTagName('input');
+        for (let i = 0; i < tallesGenerales.length; i++) {
+            const cantidadTalle = parseInt(tallesGenerales[i].value) || 0;
+            if (cantidadTalle > 0) {
+                nombresTallesHTML += `<li>${tallesGenerales[i].id.replace(/_/g, ' ')}: ${cantidadTalle}</li>`;
+            }
+        }
+    } else if (pedido.prendaGeneralParticular === 'particular') {
+        pedido.nombresTalles.forEach(item => {
+            nombresTallesHTML += `<li>${item}</li>`;
+        });
+    }
+
+    nombresTallesHTML += '</ul>';
+
+    pedidoDiv.innerHTML = `
+        <h2>Pedido: ${pedido.numero}</h2>
+        <p>Nombre de Usuario: ${pedido.nombreUsuario}</p>
+        <p>Fecha de Entrega: ${pedido.fechaEntrega}</p>
+        <p>Tipo de prenda: ${pedido.tipoPrenda.replace(/_/g, ' ')}</p>
+        <p>Cantidad de prendas: ${pedido.cantidadPrendas}</p>
+        <p>Tipo de tela: ${pedido.tipoTela.replace(/_/g, ' ')}</p>
+        <p>${pedido.logoInfo}</p>
+        <p>Otros detalles: ${pedido.otrosDetalles}</p>
+        <p>Las prendas son: ${pedido.prendaGeneralParticular === 'general' ? 'Generales (todas iguales)' : 'Particulares (cada una diferente)'}</p>
+        ${nombresTallesHTML}
+    `;
+
+    // Agregar el nuevo pedido a la columna de detalles
+    detallesPedido.appendChild(pedidoDiv);
+});
+}
