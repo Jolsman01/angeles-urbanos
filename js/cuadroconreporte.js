@@ -265,17 +265,18 @@ function generarInforme() {
         nombresTalles: nombresTalles
     };
 
-    // Revisar si el nombre de usuario o la fecha cambian
-    if (localStorage.getItem('usuarioNombre') !== nombreUsuario || localStorage.getItem('fechaEntrega') !== fechaEntrega) {
-        pedidos = [];  // Limpiar el array de pedidos si el usuario o la fecha cambian
-        pedidoNumero = 1;  // Reiniciar el número de pedido
-    }
+   // Guardar el pedido en el array de pedidos
+   pedidos.push(pedido);
 
-    pedidos.push(pedido);
-    actualizarInforme();  // Actualiza la columna de informes
-    guardarDatos(); // Guarda los datos actualizados en el localStorage
-    pedidoNumero++;
-    localStorage.setItem('pedidoNumero', pedidoNumero);  // Guardar el nuevo número de pedido
+   // Guardar el array actualizado en el localStorage
+   localStorage.setItem('pedidos', JSON.stringify(pedidos));
+
+   // Actualizar la segunda columna con el nuevo informe
+   actualizarInforme();
+
+   // Incrementar el número de pedido y actualizar el ID
+   pedidoNumero++;
+   localStorage.setItem('pedidoNumero', pedidoNumero);
 }
 
 function actualizarInforme() {
