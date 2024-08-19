@@ -1,11 +1,9 @@
 // Limpieza opcional del localStorage
 // localStorage.clear();
-
-
-let usuarioNombre = localStorage.getItem('usuarioNombre') || 'Usuario';  // Nombre del usuario
+let usuarioNombre = localStorage.getItem('usuarioNombre');  // Nombre del usuario
 let pedidoNumero = parseInt(localStorage.getItem('pedidoNumero')) || 1;  // Número de pedido actual
 let pedidos = JSON.parse(localStorage.getItem('pedidos')) || [];  // Pedidos existentes en localStorage
-let pedidoId = `${usuarioNombre}_${new Date().toISOString().split('T')[0]}_${pedidoNumero}`;  // Generar el ID del pedido
+let pedidoId = '';  // Inicializamos vacío y lo generaremos correctamente más tarde
 
 function updateOptions() {
     const tipoPrenda = document.getElementById('tipoPrenda').value;
@@ -35,6 +33,25 @@ function updateOptions() {
         `;
         dynamicOptions.appendChild(div);
     });
+}
+
+function iniciarNuevoPedido() {
+    localStorage.clear();  // Limpiar todo el localStorage al iniciar un nuevo pedido
+    pedidoNumero = 1;  // Reiniciar el número de pedido
+    usuarioNombre = document.getElementById('username').value || 'Usuario';
+    pedidoId = `${usuarioNombre}_${new Date().toISOString().split('T')[0]}_${pedidoNumero}`;  // Crear un nuevo ID de pedido
+
+    // Actualizar el localStorage con el nuevo estado inicial
+    localStorage.setItem('usuarioNombre', usuarioNombre);
+    localStorage.setItem('pedidoNumero', pedidoNumero);
+    localStorage.setItem('pedidos', JSON.stringify([]));  // Iniciar con un array vacío de pedidos
+
+    limpiarFormulario();  // Limpiar el formulario de la primera columna para empezar de nuevo
+    updateOptions();  // Actualizar las opciones dinámicas
+
+    // Opcional: limpiar la segunda columna
+    const detallesPedido = document.getElementById('detallesPedido');
+    detallesPedido.innerHTML = '';  // Limpia la segunda columna para iniciar un nuevo pedido
 }
 
 // Función para actualizar las opciones de tela según el tipo de prenda seleccionado
