@@ -61,8 +61,7 @@ function iniciarNuevoPedido() {
     localStorage.setItem('pedidos', JSON.stringify([]));  // Iniciar con un array vacío de pedidos
 
     limpiarFormulario();  // Limpiar el formulario de la primera columna para empezar de nuevo
-    updateOptions();  // Actualizar las opciones dinámicas
-
+    
     // Limpiar la segunda columna
     const detallesPedido = document.getElementById('detallesPedido');
     detallesPedido.innerHTML = '';  // Limpia la segunda columna para iniciar un nuevo pedido
@@ -338,8 +337,8 @@ function actualizarInforme() {
         nombresTallesHTML = `<p>Nombres y Talles:</p><ul>${pedido.nombresTalles.map(item => `<li>${item}</li>`).join('')}</ul>`;
     }
         pedidoDiv.innerHTML = `
-            <h4>ID del Pedido: ${pedido.pedidoId}</h4>
-            <p>Tipo de Prenda: ${pedido.tipoPrenda}</p>
+            <h2>ID del Pedido: ${pedido.pedidoId}</h2>
+            <h3>Tipo de Prenda: ${pedido.tipoPrenda}</h3>
             <p>Cantidad: ${pedido.cantidadPrendas}</p>
             <p>Tipo de Tela: ${pedido.tipoTela}</p>
             <p>Fecha de Entrega: ${pedido.fechaEntrega}</p>
@@ -375,6 +374,8 @@ function limpiarFormulario() {
     document.getElementById('otrosDetalles').value = '';
     document.getElementById('dynamicOptions').innerHTML = '';  // Limpiar opciones dinámicas
     actualizarOpcionesTela();
+    updateOptions();  // Actualizar las opciones dinámicas
+
 
     const generalParticular = document.querySelector('input[name="generalParticular"]:checked');
     if (generalParticular) {
@@ -395,9 +396,11 @@ function agregarOtroPedido() {
         cantidadPrendas: document.getElementById('cantidadPrendas').value,
         tipoTela: document.getElementById('tipoTela').value,
         otrosDetalles: document.getElementById('otrosDetalles').value,
+        prendaGeneralParticular: document.querySelector('input[name="generalParticular"]:checked').value,
+        nombresTalles: getNombresTalles(), // Esto captura la información de talles y nombres
         logos: getLogosFromDynamicOptions()
     };
-
+    
     // Asegúrate de que el pedido actual tiene un array 'prendas'
     if (!pedidos[pedidos.length - 1].prendas) {
         pedidos[pedidos.length - 1].prendas = [];
@@ -429,7 +432,7 @@ function agregarPrendaAInforme(prenda) {
     const pedidoDiv = document.createElement('div');
     pedidoDiv.className = 'pedido';
     pedidoDiv.innerHTML = `
-        <h4>Prenda Añadida: ${prenda.tipoPrenda}</h4>
+        <h3>Prenda Añadida: ${prenda.tipoPrenda}</h3>
         <p>Cantidad: ${prenda.cantidadPrendas}</p>
         <p>Tipo de Tela: ${prenda.tipoTela}</p>
         <p>Detalles: ${prenda.otrosDetalles}</p>
@@ -440,6 +443,29 @@ function agregarPrendaAInforme(prenda) {
     detallesPedido.appendChild(pedidoDiv);
 }
 
+function getNombresTalles() {
+    const prendaGeneralParticular = document.querySelector('input[name="generalParticular"]:checked').value;
+    let nombresTalles = [];
+
+    if (prendaGeneralParticular === 'general') {
+        const tallesGenerales = document.getElementById('tallesGenerales').getElementsByTagName('input');
+        for (let i = 0; i < tallesGenerales.length; i++) {
+            const cantidadTalle = parseInt(tallesGenerales[i].value) || 0;
+            if (cantidadTalle > 0) {
+                nombresTalles.push(`${tallesGenerales[i].id.replace(/_/g, ' ')}: ${cantidadTalle}`);
+            }
+        }
+    } else if (prendaGeneralParticular === 'particular') {
+        const cantidadPrendas = parseInt(document.getElementById('cantidadPrendas').value);
+        for (let i = 1; i <= cantidadPrendas; i++) {
+            const talle = document.getElementById(`talle${i}`).value;
+            const nombreLogo = document.getElementById(`nombreLogo${i}`).value;
+            nombresTalles.push(`Prenda ${i}: Talle ${talle}, Nombre/Logo: ${nombreLogo}`);
+        }
+    }
+
+    return nombresTalles;
+}
 
 function downloadPDF() {
     // Seleccionamos el contenido de la segunda columna

@@ -86,6 +86,14 @@
   color: #FF4500;
 }
 
+.Segundacolumna h3 {
+  font-family: var(--fuentePrincipal);
+  font-size: 3.2rem;
+  margin-top: 0.8rem;
+  margin-bottom: 1rem;
+  color: #fdfdfd;
+}
+
 .cuadrodeinforme button.unnuevo-button,
 .botondepdf {
   width: 100%;
