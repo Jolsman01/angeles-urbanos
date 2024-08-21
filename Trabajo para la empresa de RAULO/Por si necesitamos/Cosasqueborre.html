@@ -1425,3 +1425,29 @@ function actualizarInforme() {
             detallesPedido.appendChild(pedidoDiv);
         });
     }
+
+    // Guardar datos en el almacenamiento local
+function guardarDatos() {
+    localStorage.setItem('tipoPrenda', document.getElementById('tipoPrenda').value);
+    localStorage.setItem('tipoTela', document.getElementById('tipoTela').value);
+    localStorage.setItem('pedidoNumero', pedidoNumero);
+    localStorage.setItem('pedidos', JSON.stringify(pedidos));
+    localStorage.setItem('pedidoId', pedidoId);
+    localStorage.setItem('usuarioNombre', usuarioNombre);
+}
+
+function getLogosFromDynamicOptions() {
+    const dynamicOptions = document.getElementById('dynamicOptions').querySelectorAll('input[type="number"]');
+    let logos = [];
+
+    dynamicOptions.forEach(opcion => {
+        const cantidad = opcion.value;
+        if (cantidad > 0) {
+            const ubicacion = opcion.id.replace(/_/g, ' ');
+            logos.push({ ubicacion: ubicacion, cantidad: cantidad });
+        }
+    });
+
+    return logos;
+}
+

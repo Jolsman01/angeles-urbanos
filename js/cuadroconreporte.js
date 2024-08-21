@@ -214,69 +214,6 @@ function validarParticulares() {
     return true;
 }
 
-function agregarOtroPedido() {
-    // Crear una nueva prenda basada en los valores actuales del formulario
-    const nuevaPrenda = {
-        tipoPrenda: document.getElementById('tipoPrenda').value,
-        cantidadPrendas: document.getElementById('cantidadPrendas').value,
-        tipoTela: document.getElementById('tipoTela').value,
-        otrosDetalles: document.getElementById('otrosDetalles').value,
-        logos: getLogosFromDynamicOptions()
-    };
-
-    // Agregar la nueva prenda al pedido actual
-    if (!pedidos.length) {
-        alert("No se ha iniciado un pedido. Por favor, genera un pedido primero.");
-        return;
-    }
-    pedidos[pedidos.length - 1].prendas.push(nuevaPrenda);
-
-    // Guardar los cambios en el localStorage
-    localStorage.setItem('pedidos', JSON.stringify(pedidos));
-
-    // Actualizar la segunda columna con la información de las prendas
-    actualizarInforme();
-
-    // Limpiar el formulario de la primera columna para que puedas agregar otra prenda
-    limpiarFormulario();
-}
-
-
-// Guardar datos en el almacenamiento local
-function guardarDatos() {
-    localStorage.setItem('tipoPrenda', document.getElementById('tipoPrenda').value);
-    localStorage.setItem('tipoTela', document.getElementById('tipoTela').value);
-    localStorage.setItem('pedidoNumero', pedidoNumero);
-    localStorage.setItem('pedidos', JSON.stringify(pedidos));
-    localStorage.setItem('pedidoId', pedidoId);
-    localStorage.setItem('usuarioNombre', usuarioNombre);
-}
-
-// Limpiar formulario para agregar otra prenda
-function limpiarFormulario() {
-    document.getElementById('tipoPrenda').value = '';
-    document.getElementById('tipoTela').value = '';
-    document.getElementById('cantidadPrendas').value = '';
-    document.getElementById('otrosDetalles').value = '';
-    document.getElementById('dynamicOptions').innerHTML = '';  // Limpiar opciones dinámicas
-    document.querySelector('input[name="generalParticular"]:checked').checked = false;  // Limpiar la selección de General/Particular
-}
-
-function getLogosFromDynamicOptions() {
-    const dynamicOptions = document.getElementById('dynamicOptions').querySelectorAll('input[type="number"]');
-    let logos = [];
-
-    dynamicOptions.forEach(opcion => {
-        const cantidad = opcion.value;
-        if (cantidad > 0) {
-            const ubicacion = opcion.id.replace(/_/g, ' ');
-            logos.push({ ubicacion: ubicacion, cantidad: cantidad });
-        }
-    });
-
-    return logos;
-}
-
 function generarInforme() {
     // Obtén los valores básicos
     const tipoPrenda = document.getElementById('tipoPrenda').value;
@@ -345,7 +282,8 @@ function generarInforme() {
         logoInfo: logoInfo,
         otrosDetalles: otrosDetalles,
         fechaEntrega: fechaEntrega,
-        nombresTalles: nombresTalles
+        nombresTalles: nombresTalles,
+        prendas: [] 
     };
 
     // Guardar el pedido en el array de pedidos
@@ -414,6 +352,93 @@ function actualizarInforme() {
     });
 }
 
+function getLogosFromDynamicOptions() {
+    const dynamicOptions = document.getElementById('dynamicOptions').querySelectorAll('input[type="number"]');
+    let logos = [];
+
+    dynamicOptions.forEach(opcion => {
+        const cantidad = opcion.value;
+        if (cantidad > 0) {
+            const ubicacion = opcion.id.replace(/_/g, ' ');
+            logos.push({ ubicacion: ubicacion, cantidad: cantidad });
+        }
+    });
+
+    return logos;
+}
+
+// Limpiar formulario para agregar otra prenda
+function limpiarFormulario() {
+    document.getElementById('tipoPrenda').value = '';
+    document.getElementById('tipoTela').value = '';
+    document.getElementById('cantidadPrendas').value = '';
+    document.getElementById('otrosDetalles').value = '';
+    document.getElementById('dynamicOptions').innerHTML = '';  // Limpiar opciones dinámicas
+    actualizarOpcionesTela();
+
+    const generalParticular = document.querySelector('input[name="generalParticular"]:checked');
+    if (generalParticular) {
+        generalParticular.checked = false;  // Limpiar la selección de General/Particular
+    }
+
+}
+
+function agregarOtroPedido() {
+    // Verifica si hay un pedido en progreso
+    if (!pedidos.length) {
+        alert("No se ha iniciado un pedido. Por favor, genera un pedido primero.");
+        return;
+    }
+    // Crear una nueva prenda basada en los valores actuales del formulario
+    const nuevaPrenda = {
+        tipoPrenda: document.getElementById('tipoPrenda').value,
+        cantidadPrendas: document.getElementById('cantidadPrendas').value,
+        tipoTela: document.getElementById('tipoTela').value,
+        otrosDetalles: document.getElementById('otrosDetalles').value,
+        logos: getLogosFromDynamicOptions()
+    };
+
+    // Asegúrate de que el pedido actual tiene un array 'prendas'
+    if (!pedidos[pedidos.length - 1].prendas) {
+        pedidos[pedidos.length - 1].prendas = [];
+    }
+
+    pedidos[pedidos.length - 1].prendas.push(nuevaPrenda);
+
+    // Guardar los cambios en el localStorage
+    localStorage.setItem('pedidos', JSON.stringify(pedidos));
+
+     // Añadir la nueva prenda a la segunda columna directamente
+     agregarPrendaAInforme(nuevaPrenda);
+
+    // Limpiar el formulario de la primera columna para que puedas agregar otra prenda
+    limpiarFormulario();
+}
+
+function agregarPrendaAInforme(prenda) {
+    const detallesPedido = document.getElementById('detallesPedido');
+
+    let nombresTallesHTML = '';
+
+    if (prenda.prendaGeneralParticular === 'general') {
+        nombresTallesHTML = `<p>Talles y Cantidades: ${prenda.nombresTalles.join(', ')}</p>`;
+    } else if (prenda.prendaGeneralParticular === 'particular') {
+        nombresTallesHTML = `<p>Nombres y Talles:</p><ul>${prenda.nombresTalles.map(item => `<li>${item}</li>`).join('')}</ul>`;
+    }
+
+    const pedidoDiv = document.createElement('div');
+    pedidoDiv.className = 'pedido';
+    pedidoDiv.innerHTML = `
+        <h4>Prenda Añadida: ${prenda.tipoPrenda}</h4>
+        <p>Cantidad: ${prenda.cantidadPrendas}</p>
+        <p>Tipo de Tela: ${prenda.tipoTela}</p>
+        <p>Detalles: ${prenda.otrosDetalles}</p>
+        ${nombresTallesHTML}
+        <p>Ubicaciones seleccionadas:</p>
+        <ul>${prenda.logos.map(logo => `<li>${logo.ubicacion}: ${logo.cantidad}</li>`).join('')}</ul>
+    `;
+    detallesPedido.appendChild(pedidoDiv);
+}
 
 
 function downloadPDF() {
