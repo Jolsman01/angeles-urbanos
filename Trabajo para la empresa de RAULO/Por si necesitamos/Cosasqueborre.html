@@ -1451,3 +1451,7 @@ function getLogosFromDynamicOptions() {
     return logos;
 }
 
+// Añadir el botón de cerrar al nuevo contenido
+modalContent.querySelector('button').addEventListener('click', function() {
+    modalContainer.style.display = 'none';
+});

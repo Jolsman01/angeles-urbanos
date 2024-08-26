@@ -150,109 +150,117 @@ document.addEventListener("DOMContentLoaded", function() {
 
     cuadros.forEach(cuadro => {
         cuadro.addEventListener('click', function() {
-            const item = this.querySelector('h3').innerText;
+            const item = this.querySelector('h3').innerText.toLowerCase();
             let imageUrl = '';
-            let redirigirUrl = '';
+            let opciones = '';
 
             // Determine the image URL based on the item text
-            switch(item.toLowerCase()) {
+            switch(item) {
                 case 'chomba':
-                    imageUrl = '../imagenes/imagenes_seccion_disenar/chomba.png';
-                    redirigirUrl = '#';
+                    opciones = {
+                        A: '../imagenes/imagenes_seccion_disenar/chomba.png',
+                        B: '../imagenes/imagenes_colorazul_disenos/prueba_chomba_connaranja.png',
+                        C: '../imagenes/imagenes_colorverde_diseños/chomba_verde.png'
+                    };
+                    imageUrl = opciones.A; // Por defecto se muestra la opción A
                     break;
                 case 'remera':
-                    imageUrl = '../imagenes/imagenes_seccion_disenar/remera_en_o.png';
-                    redirigirUrl = '#';
+                    opciones = {
+                        A: '../imagenes/imagenes_seccion_disenar/remera_en_o.png',
+                        B: '../imagenes/imagenes_colorazul_disenos/prueba_chomba_connaranja.png',
+                        C: '../imagenes/imagenes_colorverde_diseños/chomba_verde.png'
+                    };
+                    imageUrl = opciones.A; // Por defecto se muestra la opción A
                     break;
                 case 'remera v':
-                    imageUrl = '../imagenes/imagenes_seccion_disenar/remera_en_v.png';
-                    redirigirUrl = '#';
+                    opciones = {
+                        A: '../imagenes/imagenes_seccion_disenar/remera_en_v.png',
+                        B: '../imagenes/imagenes_colorazul_disenos/prueba_chomba_connaranja.png',
+                        C: '../imagenes/imagenes_colorverde_diseños/chomba_verde.png'
+                    };
+                    imageUrl = opciones.A; // Por defecto se muestra la opción A
                     break;
                 case 'campera':
-                    imageUrl = '../imagenes/imagenes_seccion_disenar/campera.png';
-                    redirigirUrl = '#';
+                    opciones = {
+                        A:  '../imagenes/imagenes_seccion_disenar/campera.png',
+                        B: '../imagenes/imagenes_colorazul_disenos/prueba_chomba_connaranja.png',
+                        C: '../imagenes/imagenes_colorverde_diseños/chomba_verde.png'
+                    };
+                    imageUrl = opciones.A; // Por defecto se muestra la opción A
                     break;
                 case 'canguro':
-                    imageUrl = '../imagenes/imagenes_seccion_disenar/canguro.png';
-                    redirigirUrl = '#';
+                    opciones = {
+                        A:  '../imagenes/imagenes_seccion_disenar/canguro.png',
+                        B: '../imagenes/imagenes_colorazul_disenos/prueba_chomba_connaranja.png',
+                        C: '../imagenes/imagenes_colorverde_diseños/chomba_verde.png'
+                    };
+                    imageUrl = opciones.A; // Por defecto se muestra la opción A
                     break;
                 case 'gorras':
-                    imageUrl = '../imagenes/imagenes_seccion_disenar/gorras.png';
-                    redirigirUrl = '#';
+                    opciones = {
+                        A:  '../imagenes/imagenes_seccion_disenar/gorras.png',
+                        B: '../imagenes/imagenes_colorazul_disenos/prueba_chomba_connaranja.png',
+                        C: '../imagenes/imagenes_colorverde_diseños/chomba_verde.png'
+                    };
+                    imageUrl = opciones.A; // Por defecto se muestra la opción A
                     break;
                 default:
                     imageUrl = '';
-                    redirigirUrl = '#';
             }
-
+    
+            // Crea el contenido del modal
             modalContent.innerHTML = `
                 <button style="position: absolute; top: 10px; right: 10px;">Cerrar</button>
                 <section class="fondo-naranja" style="height: 100%; width: 100%; display: flex; align-items: center; justify-content: center;">
                     <div class="fondo-naranja-flex">
-                        <img src="${imageUrl}" alt="${item.toUpperCase()}">
+                        <img id="imagen-prenda" src="${imageUrl}" alt="${item.toUpperCase()}">
                         <div class="menu-modelo">
-                        <label for="opciones"></label>
-                        <select id="opciones" name="opciones">
-        <option value="">MODELO</option>
-        <option value="A">OPCION A</option>
-        <option value="B">OPCION B</option>
-        <option value="C">OPCION C</option>
-        <option value="D">OPCION D</option>
-    </select>
-</div>
+                            <label for="opciones"></label>
+                            <select id="opciones" name="opciones">
+                                <option value="A">OPCION A</option>
+                                <option value="B">OPCION B</option>
+                                <option value="C">OPCION C</option>
+                            </select>
+                        </div>
                     </div>
                 </section>
             `;
-        const styles = document.createElement('style');
-styles.innerHTML = `
-    .contenedor-boton {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-top: 20px;
-    }
-
-    .boton-diseñemos {
-        background-color: blue;
-        color: orange;
-        border: 5px solid blue;
-        border-radius: 5px;
-        padding: 10px 20px;
-        font-size: 16px;
-        cursor: pointer;
-        transition: background-color 0.3s, transform 0.3s;
-    }
-
-    .boton-diseñemos:hover {
-        background-color: darkblue;
-        transform: scale(1.05);
-    }
-`;
-document.head.appendChild(styles);
-
-            // Añadir el botón de cerrar al nuevo contenido
-            modalContent.querySelector('button').addEventListener('click', function() {
-                modalContainer.style.display = 'none';
-            });
-
-            //agregar función de redireccion al botón diseñemos
 
             // Mostrar el modal
+            const modalContainer = document.getElementById('modalContainer');
+            modalContainer.innerHTML = ''; // Limpiar el contenido anterior
+            modalContainer.appendChild(modalContent);
             modalContainer.style.display = 'flex';
+
+          // Cerrar el modal
+          modalContent.querySelector('button').addEventListener('click', function() {
+            modalContainer.style.display = 'none';
+        });
+
+        // Cambiar imagen según la opción seleccionada
+        const selectElement = modalContent.querySelector('#opciones');
+        selectElement.addEventListener('change', function() {
+            const selectedOption = this.value;
+            const imgElement = document.getElementById('imagen-prenda');
+            imgElement.src = opciones[selectedOption];
         });
     });
+});
+});
 
-    // Cerrar el modal al hacer clic fuera del contenido del modal
-    modalContainer.addEventListener('click', function(event) {
-        if (event.target === modalContainer || event.target === modalContent) {
-            modalContainer.style.display = 'none';
-        }
-    });
-
-    // Cerrar el modal al presionar la tecla Escape
+        
+        // Cerrar el modal al hacer clic fuera del contenido del modal
+        modalContainer.addEventListener('click', function(event) {
+            if (event.target === modalContainer || event.target === modalContent) {
+                modalContainer.style.display = 'none';
+            }
+        });
+        // Cerrar el modal al presionar la tecla Escape
     document.addEventListener('keydown', function(event) {
         if (event.key === 'Escape') {
             modalContainer.style.display = 'none';
         }
     });
-});
+
+
+
