@@ -468,21 +468,47 @@ function getNombresTalles() {
 }
 
 function downloadPDF() {
+    let filename = pedidoId ? `${pedidoId}.pdf` : 'pedido.pdf';  // Si 'pedidoId' está vacío, usar un valor por defecto
+    
     // Seleccionamos el contenido de la segunda columna
     var element = document.querySelector('.pequeños-box');
+
+    // Expande temporalmente el contenedor para que todo su contenido sea visible
+    element.style.height = 'auto';
+    element.style.overflow = 'visible';
+    element.style.fontSize = '12px';  // Cambia el tamaño de la fuente aquí (ajústalo según tus necesidades)
+    // Ajusta los tamaños de H2, H3, y H4
+    element.querySelectorAll('h2').forEach(el => el.style.fontSize = '15px');
+    element.querySelectorAll('h3').forEach(el => el.style.fontSize = '14px');
+    element.querySelectorAll('h4').forEach(el => el.style.fontSize = '13px');
 
     // Configuración de html2pdf
     var options = {
         margin:       0.5,
-        filename:     'pedido.pdf',
+        filename:     filename,
         image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { scale: 2 },
-        jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+        html2canvas:  { 
+            scale: 2,
+            useCORS: true,  // Asegura la captura de contenido externo
+            logging: true,  // Opción para depurar en caso de problemas
+            windowWidth: element.scrollWidth,  // Ajusta el ancho de captura
+            windowHeight: element.scrollHeight  // Ajusta la altura de captura
+        },
+        jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
     };
 
     // Generamos el PDF
-    html2pdf().from(element).set(options).save();
+    html2pdf().from(element).set(options).save().then(() => {
+        // Restaura los estilos originales después de guardar el PDF
+        element.style.height = '';
+        element.style.overflow = '';
+        element.style.fontSize = '';  // Restaura el tamaño de la fuente original
+        element.querySelectorAll('h2').forEach(el => el.style.fontSize = '');  // Restaura H2
+        element.querySelectorAll('h3').forEach(el => el.style.fontSize = '');  // Restaura H3
+        element.querySelectorAll('h4').forEach(el => el.style.fontSize = '');  // Restaura H4
+    });
 }
+
 
 // Inicializar opciones de tela y restaurar datos cuando se carga la página
 document.addEventListener('DOMContentLoaded', () => {

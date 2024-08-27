@@ -1455,3 +1455,22 @@ function getLogosFromDynamicOptions() {
 modalContent.querySelector('button').addEventListener('click', function() {
     modalContainer.style.display = 'none';
 });
+
+
+function downloadPDF() {
+    let filename = pedidoId ? `${pedidoId}.pdf` : 'pedido.pdf';  // Si 'pedidoId' está vacío, usar un valor por defecto
+    // Seleccionamos el contenido de la segunda columna
+    var element = document.querySelector('.pequeños-box');
+
+    // Configuración de html2pdf
+    var options = {
+        margin:       0.5,
+        filename:     filename,
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 2 },
+        jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
+    };
+
+    // Generamos el PDF
+    html2pdf().from(element).set(options).save();
+}
