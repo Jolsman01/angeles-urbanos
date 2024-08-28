@@ -5,7 +5,93 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+<style>
+    footer {
+    background-color: var(--gris);
+    color: var(--blanco);
+    padding: 20px 0;
+    text-align: center;
+    font-family: var(--fuentePrincipal);
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-content,
+.footer-social {
+    margin: 20px;
+}
+
+.footer-content h3,
+.footer-social h3 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.footer-content p,
+.footer-social a {
+    font-size: 1.6rem;
+    margin: 5px 0;
+    color: var(--blanco);
+    text-decoration: none;
+}
+
+.footer-social a {
+    display: inline-block;
+    margin: 0 10px;
+    width: 40px;
+    height: 40px;
+}
+
+.footer-social img {
+    width: 100%;
+    height: auto;
+}
+
+.footer-bottom {
+    margin-top: 20px;
+    border-top: 1px solid var(--azul);
+    padding-top: 10px;
+}
+
+.footer-bottom p {
+    font-size: 1.4rem;
+    margin: 0;
+}
+</style>
+
 <body>
+    
+    <footer>
+        <div class="footer-container">
+            <div class="footer-content">
+                <h3>Contacto</h3>
+                <p>Teléfono: +34 123 456 789</p>
+                <p>Email: contacto@tusitio.com</p>
+                <p>Dirección: Calle Falsa 123, Ciudad, País</p>
+            </div>
+            <div class="footer-social">
+                <h3>Síguenos</h3>
+                <a href="https://wa.me/34123456789" target="_blank" class="social-icon whatsapp">
+                    <img src="ruta-a-tu-icono-de-whatsapp.png" alt="WhatsApp">
+                </a>
+                <a href="https://instagram.com/tuusuario" target="_blank" class="social-icon instagram">
+                    <img src="ruta-a-tu-icono-de-instagram.png" alt="Instagram">
+                </a>
+                <a href="mailto:contacto@tusitio.com" class="social-icon gmail">
+                    <img src="ruta-a-tu-icono-de-gmail.png" alt="Gmail">
+                </a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Tu Sitio Web. Todos los derechos reservados.</p>
+        </div>
+    </footer>
     
 </body>
 </html>
