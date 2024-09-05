@@ -152,15 +152,14 @@ document.addEventListener("DOMContentLoaded", function() {
         cuadro.addEventListener('click', function() {
             const item = this.querySelector('h3').innerText.toLowerCase();
             let imageUrl = '';
-            let opciones = '';
-
+            let opciones = {};
             // Determine the image URL based on the item text
             switch(item) {
                 case 'chomba':
                     opciones = {
                         A: '../imagenes/imagenes_seccion_disenar/chomba.png',
                         B: '../imagenes/imagenes_colorazul_disenos/Prueba_chomba_connaranja1.png',
-                        C: '../imagenes/imagenes_colorverde_diseños/chomba_verde.png'
+                        C: '../imagenes/imagenes_colorbordo_disenos/Chombabordo.png'
                     };
                     imageUrl = opciones.A; // Por defecto se muestra la opción A
                     break;
@@ -168,7 +167,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     opciones = {
                         A: '../imagenes/imagenes_seccion_disenar/remera_en_o.png',
                         B: '../imagenes/imagenes_colorazul_disenos/Remera_en_o_Azul1.png',
-                        C: '../imagenes/imagenes_colorverde_diseños/chomba_verde.png'
+                        C: '../imagenes/imagenes_colorbordo_disenos/remera_eno_bordo.png'
                     };
                     imageUrl = opciones.A; // Por defecto se muestra la opción A
                     break;
@@ -176,7 +175,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     opciones = {
                         A: '../imagenes/imagenes_seccion_disenar/remera_en_v.png',
                         B: '../imagenes/imagenes_colorazul_disenos/Remera_en_v_Azul1.png',
-                        C: '../imagenes/imagenes_colorverde_diseños/chomba_verde.png'
+                        C: '../imagenes/imagenes_colorbordo_disenos/Remera_env_bordo.png'
                     };
                     imageUrl = opciones.A; // Por defecto se muestra la opción A
                     break;
@@ -184,7 +183,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     opciones = {
                         A:  '../imagenes/imagenes_seccion_disenar/campera.png',
                         B: '../imagenes/imagenes_colorazul_disenos/Campera_Azul1.png',
-                        C: '../imagenes/imagenes_colorverde_diseños/chomba_verde.png'
+                        C: '../imagenes/imagenes_colorbordo_disenos/Camperabordo.png'
                     };
                     imageUrl = opciones.A; // Por defecto se muestra la opción A
                     break;
@@ -192,7 +191,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     opciones = {
                         A:  '../imagenes/imagenes_seccion_disenar/canguro.png',
                         B: '../imagenes/imagenes_colorazul_disenos/Canguro_Azul1.png',
-                        C: '../imagenes/imagenes_colorverde_diseños/chomba_verde.png'
+                        C: '../imagenes/imagenes_colorbordo_disenos/Cangurobordo.png'
                     };
                     imageUrl = opciones.A; // Por defecto se muestra la opción A
                     break;
@@ -200,7 +199,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     opciones = {
                         A:  '../imagenes/imagenes_seccion_disenar/gorras.png',
                         B: '../imagenes/imagenes_colorazul_disenos/Gorra_Azul1.png',
-                        C: '../imagenes/imagenes_colorverde_diseños/chomba_verde.png'
+                        C: '../imagenes/imagenes_colorbordo_disenos/Gorrabordo.png'
                     };
                     imageUrl = opciones.A; // Por defecto se muestra la opción A
                     break;
@@ -213,7 +212,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 <button style="position: absolute; top: 10px; right: 10px;">Cerrar</button>
                 <section class="fondo-naranja" style="height: 100%; width: 100%; display: flex; align-items: center; justify-content: center;">
                     <div class="fondo-naranja-flex">
-                        <img id="imagen-prenda" src="${imageUrl}" alt="${item.toUpperCase()}">
+                        <img id="imagen-prenda" src="${imageUrl}" alt="${item.toUpperCase()}" style="width: 600px; height: 600px; margin-bottom: -130px; margin-top:-40px; object-fit:contain;">
                         <div class="menu-modelo">
                             <label for="opciones"></label>
                             <select id="opciones" name="opciones">
@@ -226,10 +225,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 </section>
             `;
 
-            // Mostrar el modal
-            const modalContainer = document.getElementById('modalContainer');
-            modalContainer.innerHTML = ''; // Limpiar el contenido anterior
-            modalContainer.appendChild(modalContent);
             modalContainer.style.display = 'flex';
 
           // Cerrar el modal
@@ -246,21 +241,22 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 });
+
+// Cerrar el modal al hacer clic fuera del contenido
+modalContainer.addEventListener('click', function(event) {
+    if (event.target === modalContainer) {
+        modalContainer.style.display = 'none';
+    }
 });
 
-        
-        // Cerrar el modal al hacer clic fuera del contenido del modal
-        modalContainer.addEventListener('click', function(event) {
-            if (event.target === modalContainer || event.target === modalContent) {
-                modalContainer.style.display = 'none';
-            }
-        });
-        // Cerrar el modal al presionar la tecla Escape
-    document.addEventListener('keydown', function(event) {
-        if (event.key === 'Escape') {
-            modalContainer.style.display = 'none';
-        }
-    });
+// Cerrar el modal al presionar la tecla Escape
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        modalContainer.style.display = 'none';
+    }
+});
+});
+
 
 
 
