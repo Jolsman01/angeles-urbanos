@@ -38,6 +38,7 @@
   animation-name: show;
 } */
 
+
 .cuadrodeinforme h3{
   font-family: var(--fuentePrincipal);
   font-size: 3.2rem;
@@ -216,3 +217,12 @@ footer {
   margin: 0;
 }
 
+@media screen and (max-width: 760px) {
+  #dynamicOptions input[type="number"],
+  #selectorpartgener,
+  #formGenerales,
+  #formParticulares {
+      width: 100%; /* Asegurarse de que los inputs tomen todo el ancho disponible */
+      font-size: 1.4rem; /* Reducir ligeramente el tamaño del texto */
+  }
+}

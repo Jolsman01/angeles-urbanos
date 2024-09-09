@@ -168,4 +168,53 @@
     border: 1px solid #ccc;  /* Bordes ligeros */
 }
 
+/* Ajustes generales para pantallas pequeñas */
+@media screen and (max-width: 768px) {
+    .fondo_disenemos {
+        height: auto; /* Ajuste para que no ocupe toda la altura en pantallas pequeñas */
+        padding: 2rem 1rem; /* Añadir espacio en pantallas pequeñas */
+    }
 
+    .contenedor {
+        margin: 0 5%; /* Reducir márgenes en pantallas pequeñas */
+    }
+
+    .titulo {
+        font-size: 3rem; /* Reducir el tamaño del título en móviles */
+        line-height: 3.5rem;
+    }
+
+    .iconos_disenar {
+        grid-template-columns: 1fr; /* Cambiar de tres columnas a una en pantallas pequeñas */
+        grid-gap: 1.5rem; /* Reducir el espacio entre los elementos */
+    }
+
+    .cuadro_iconos h3 {
+        font-size: 2rem; /* Ajustar el tamaño de la fuente en móviles */
+    }
+
+    .cuadro_iconos img {
+        width: 80%; /* Escalar las imágenes en móviles */
+        height: auto;
+    }
+
+    .cuadro_iconos {
+        transform: scale(1.1); /* Limitar el efecto de hover en pantallas pequeñas */
+    }
+}
+
+/* Ajustes para tablets (pantallas medianas) */
+@media screen and (max-width: 1024px) {
+    .iconos_disenar {
+        grid-template-columns: repeat(2, 1fr); /* Dos columnas en tabletas */
+        grid-gap: 1.5rem; /* Ajustar el espacio entre los iconos */
+    }
+
+    .cuadro_iconos h3 {
+        font-size: 2.5rem; /* Ajuste del tamaño del texto */
+    }
+
+    .cuadro_iconos img {
+        width: 90%; /* Ajustar el tamaño de la imagen en tablets */
+    }
+}

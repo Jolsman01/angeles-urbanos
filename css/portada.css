@@ -164,3 +164,13 @@
     }
 
 }
+
+@media screen and (max-width: 760px) {
+    .hero {
+        height: 50vh; /* Reducir la altura de la imagen en móviles */
+    }
+    .text-container p {
+        font-size: 4rem; /* Reducir el tamaño del texto para que no se salga de la pantalla */
+        line-height: 5rem;
+    }
+}

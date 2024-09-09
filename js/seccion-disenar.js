@@ -148,6 +148,21 @@ document.addEventListener("DOMContentLoaded", function() {
     modalContainer.appendChild(modalContent);
     document.body.appendChild(modalContainer);
 
+    // Adaptar modal para pantallas pequeñas
+    function adjustModalSize() {
+        const screenWidth = window.innerWidth;
+        if (screenWidth <= 768) {
+            modalContent.style.width = '90%';
+            modalContent.style.height = '90%';
+        } else {
+            modalContent.style.width = '70%';
+            modalContent.style.height = '70%';
+        }
+    }
+
+    adjustModalSize();
+    window.addEventListener('resize', adjustModalSize);
+
     cuadros.forEach(cuadro => {
         cuadro.addEventListener('click', function() {
             const item = this.querySelector('h3').innerText.toLowerCase();
