@@ -172,49 +172,49 @@ document.addEventListener("DOMContentLoaded", function() {
             switch(item) {
                 case 'chomba':
                     opciones = {
-                        A: '../imagenes/imagenes_seccion_disenar/chomba.png',
-                        B: '../imagenes/imagenes_colorazul_disenos/Prueba_chomba_connaranja1.png',
-                        C: '../imagenes/imagenes_colorbordo_disenos/Chombabordo.png'
+                        A: 'imagenes/imagenes_seccion_disenar/chomba.png',
+                        B: 'imagenes/imagenes_colorazul_disenos/Prueba_chomba_connaranja1.png',
+                        C: 'imagenes/imagenes_colorbordo_disenos/Chombabordo.png'
                     };
                     imageUrl = opciones.A; // Por defecto se muestra la opción A
                     break;
                 case 'remera':
                     opciones = {
-                        A: '../imagenes/imagenes_seccion_disenar/remera_en_o.png',
-                        B: '../imagenes/imagenes_colorazul_disenos/Remera_en_o_Azul1.png',
-                        C: '../imagenes/imagenes_colorbordo_disenos/remera_eno_bordo.png'
+                        A: 'imagenes/imagenes_seccion_disenar/remera_en_o.png',
+                        B: 'imagenes/imagenes_colorazul_disenos/Remera_en_o_Azul1.png',
+                        C: 'imagenes/imagenes_colorbordo_disenos/remera_eno_bordo.png'
                     };
                     imageUrl = opciones.A; // Por defecto se muestra la opción A
                     break;
                 case 'remera v':
                     opciones = {
-                        A: '../imagenes/imagenes_seccion_disenar/remera_en_v.png',
-                        B: '../imagenes/imagenes_colorazul_disenos/Remera_en_v_Azul1.png',
-                        C: '../imagenes/imagenes_colorbordo_disenos/Remera_env_bordo.png'
+                        A: 'imagenes/imagenes_seccion_disenar/remera_en_v.png',
+                        B: 'imagenes/imagenes_colorazul_disenos/Remera_en_v_Azul1.png',
+                        C: 'imagenes/imagenes_colorbordo_disenos/Remera_env_bordo.png'
                     };
                     imageUrl = opciones.A; // Por defecto se muestra la opción A
                     break;
                 case 'campera':
                     opciones = {
-                        A:  '../imagenes/imagenes_seccion_disenar/campera.png',
-                        B: '../imagenes/imagenes_colorazul_disenos/Campera_Azul1.png',
-                        C: '../imagenes/imagenes_colorbordo_disenos/Camperabordo.png'
+                        A:  'imagenes/imagenes_seccion_disenar/campera.png',
+                        B: 'imagenes/imagenes_colorazul_disenos/Campera_Azul1.png',
+                        C: 'imagenes/imagenes_colorbordo_disenos/Camperabordo.png'
                     };
                     imageUrl = opciones.A; // Por defecto se muestra la opción A
                     break;
                 case 'canguro':
                     opciones = {
-                        A:  '../imagenes/imagenes_seccion_disenar/canguro.png',
-                        B: '../imagenes/imagenes_colorazul_disenos/Canguro_Azul1.png',
-                        C: '../imagenes/imagenes_colorbordo_disenos/Cangurobordo.png'
+                        A:  'imagenes/imagenes_seccion_disenar/canguro.png',
+                        B: 'imagenes/imagenes_colorazul_disenos/Canguro_Azul1.png',
+                        C: 'imagenes/imagenes_colorbordo_disenos/Cangurobordo.png'
                     };
                     imageUrl = opciones.A; // Por defecto se muestra la opción A
                     break;
                 case 'gorras':
                     opciones = {
-                        A:  '../imagenes/imagenes_seccion_disenar/gorras.png',
-                        B: '../imagenes/imagenes_colorazul_disenos/Gorra_Azul1.png',
-                        C: '../imagenes/imagenes_colorbordo_disenos/Gorrabordo.png'
+                        A:  'imagenes/imagenes_seccion_disenar/gorras.png',
+                        B: 'imagenes/imagenes_colorazul_disenos/Gorra_Azul1.png',
+                        C: 'imagenes/imagenes_colorbordo_disenos/Gorrabordo.png'
                     };
                     imageUrl = opciones.A; // Por defecto se muestra la opción A
                     break;
